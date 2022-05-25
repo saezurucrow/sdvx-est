@@ -1,4 +1,4 @@
-# sdvx-EXScoreTool
+# README
 
 ## 技術スタック
 - Ruby 2.7.5

@@ -7,12 +7,12 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.lis
 apt-get update && apt-get install -y yarn
 
 RUN apt-get update -qq && apt-get install -y nodejs yarn
-RUN mkdir /myapp
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+RUN mkdir /sdvxest
+WORKDIR /sdvxest
+COPY Gemfile /sdvxest/Gemfile
+COPY Gemfile.lock /sdvxest/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY . /sdvxest
 
 RUN yarn install --check-files
 RUN bundle exec rails webpacker:compile

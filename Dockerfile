@@ -9,10 +9,10 @@ apt-get update && apt-get install -y yarn
 RUN apt-get update -qq && apt-get install -y nodejs yarn
 RUN mkdir /sdvxest
 WORKDIR /sdvxest
-COPY Gemfile /sdvxest/Gemfile
-COPY Gemfile.lock /sdvxest/Gemfile.lock
+COPY Gemfile ./Gemfile
+COPY Gemfile.lock ./Gemfile.lock
 RUN bundle install
-COPY . /sdvxest
+COPY . .
 
 RUN yarn install --check-files
 RUN bundle exec rails webpacker:compile

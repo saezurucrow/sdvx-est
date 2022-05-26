@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  UploadStatus: MyString
+  ExScoreDifference: MyString
+  Setting: MyString
+
+two:
+  UploadStatus: MyString
+  ExScoreDifference: MyString
+  Setting: MyString

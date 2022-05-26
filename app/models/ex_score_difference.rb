@@ -1,0 +1,2 @@
+class ExScoreDifference < ApplicationRecord
+end

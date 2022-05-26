@@ -1,0 +1,2 @@
+class ExScore < ApplicationRecord
+end

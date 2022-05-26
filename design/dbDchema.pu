@@ -1,0 +1,85 @@
+@startuml sdvxest
+
+entity User {
+  id: number (pk)
+  --
+  username: string
+  password: string
+  playerId: string
+  playerName: string
+  volforce: float
+  skillLevel: integer(enum)
+  arenaRank: integer(enum)
+  arenaScore: number
+  createdAt: date
+  updatedAt: date
+}
+' (op)rivalData
+
+entity Music {
+  id: number (pk)
+  --
+  name: string
+  artist: string
+  version: number
+  level: number
+  difficult: integer(enum)
+  maxExScore: number
+  createdAt: date
+  updatedAt: date
+}
+' (op) bpm(min - max)
+
+entity ExScore {
+  id: number (pk)
+  --
+  userId: number (fk)
+  musicId: number (fk)
+  exScore: number
+  playCount: number
+  createdAt: date
+  updatedAt: date
+}
+
+' アップロード状況
+entity UploadStatus {
+  id: number (pk)
+  --
+  userId: number (fk)
+  uploadScoreCount: number
+  createdAt: date
+  updatedAt: date
+}
+
+' 差分
+entity ExScoreDifference {
+  id: number (pk)
+  --
+  userId: number (fk)
+  musicId: number (fk)
+  uploadStatusId: number (fk)
+  beforeExScore: number
+  afterExScore: number
+  createdAt: date
+  updatedAt: date
+}
+
+' 公開設定
+entity Setting {
+  id: number (pk)
+  --
+  userId: number (fk)
+  opened: boolean
+}
+
+User }o-- Setting
+User }o-- UploadStatus
+User }o-- ExScore
+User }o-- ExScoreDifference
+
+Music }o-- ExScore
+Music }o-- ExScoreDifference
+
+UploadStatus }o-- ExScoreDifference
+
+@enduml

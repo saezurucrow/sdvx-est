@@ -3,27 +3,30 @@
 entity User {
   id: number (pk)
   --
+  settingId: number (fk)
   username: string
   password: string
   playerId: string
   playerName: string
   volforce: float
-  skillLevel: integer(enum)
-  arenaRank: integer(enum)
+  skillLevel: number(enum)
+  arenaRank: number(enum)
   arenaScore: number
+  deleted: boolean
   createdAt: date
   updatedAt: date
+  deletedAt: date
 }
 ' (op)rivalData
 
-entity Music {
+entity Songs {
   id: number (pk)
   --
   name: string
   artist: string
   version: number
   level: number
-  difficult: integer(enum)
+  difficult: number(enum)
   maxExScore: number
   createdAt: date
   updatedAt: date
@@ -34,7 +37,7 @@ entity ExScore {
   id: number (pk)
   --
   userId: number (fk)
-  musicId: number (fk)
+  songId: number (fk)
   exScore: number
   playCount: number
   createdAt: date
@@ -56,7 +59,7 @@ entity ExScoreDifference {
   id: number (pk)
   --
   userId: number (fk)
-  musicId: number (fk)
+  songId: number (fk)
   uploadStatusId: number (fk)
   beforeExScore: number
   afterExScore: number
@@ -68,17 +71,16 @@ entity ExScoreDifference {
 entity Setting {
   id: number (pk)
   --
-  userId: number (fk)
-  opened: boolean
+  opened: number (enum)
 }
 
-User }o-- Setting
+Setting }o-- User
 User }o-- UploadStatus
 User }o-- ExScore
 User }o-- ExScoreDifference
 
-Music }o-- ExScore
-Music }o-- ExScoreDifference
+Song }o-- ExScore
+Song }o-- ExScoreDifference
 
 UploadStatus }o-- ExScoreDifference
 

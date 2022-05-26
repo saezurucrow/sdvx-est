@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateExScoreDifferences < ActiveRecord::Migration[6.1]
   def change
     create_table :ex_score_differences do |t|

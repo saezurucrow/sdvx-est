@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateUploadStatuses < ActiveRecord::Migration[6.1]
   def change
     create_table :upload_statuses do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateUserColumns < ActiveRecord::Migration[6.1]
   def change
     add_column :users, :setting_at, :integer

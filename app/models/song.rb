@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Song < ApplicationRecord
   enum difficult: {
     NOV: 0,
@@ -8,6 +10,6 @@ class Song < ApplicationRecord
     MXM: 5,
     HVN: 6,
     VVD: 7,
-    XCD: 8,
+    XCD: 8
   }
 end

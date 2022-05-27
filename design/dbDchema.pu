@@ -15,6 +15,7 @@ entity User {
   createdAt: date
   updatedAt: date
   deletedAt: date
+  isAdmin: boolean
 }
 ' (op)rivalData
 

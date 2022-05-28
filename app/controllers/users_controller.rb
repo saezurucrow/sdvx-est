@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  def index
+  before_action :authenticate_user!
+
+  def mypage
+    @uesr = current_user
   end
 
   def show

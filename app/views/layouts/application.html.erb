@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sdvxest</title>
+    <title>SDVX-EST</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,10 +11,56 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">SDVX-EST</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'マイページ', root_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'スコア登録', '#', class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ランキング', '#', class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'アカウント設定', '#', class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'How to SDVX-EST', '#', class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-link', method: :delete %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'ランキング', '#', class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'How to SDVX-EST', '#', class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
 
-    <%= yield %>
+    <div class="container" style="padding-top: 1rem">
+      <%= yield %>
+    </div>
   </body>
 </html>

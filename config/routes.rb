@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'users#mypage'
+  root 'homes#index'
+
   devise_for :users
 
-  resources :users, except: :index
+  get 'users/mypage'
+  resources :users
 end
- 

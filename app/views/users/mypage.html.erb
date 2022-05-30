@@ -1,14 +1,36 @@
-<h2>ユーザーマイページ</h2>
+<article class="markdown-body">
+  <h1>マイページ</h1>
+  <table>
+    <tr>
+      <td>username</td>
+      <td><%= @user.username %></td>
+    </tr>
+    <tr>
+      <td>PLAYER ID</td>
+      <td><%= @user.player_id ? @user.player_id : "-" %></td>
+    </tr>
+    <tr>
+      <td>PLAYER NAME</td>
+      <td><%= @user.player_name ? @user.player_name : "-" %></td>
+    </tr>
+    <tr>
+      <td>VOLFORCE</td>
+      <td><%= @user.volforce ? @user.volforce : "-" %></td>
+    </tr>
+    <tr>
+      <td>ARENA RANK</td>
+      <td><%= @user.arena_rank ? @user.arena_rank : "-" %></td>
+    </tr>
+    <tr>
+      <td>ARENA SCORE</td>
+      <td><%= @user.arena_score ? @user.arena_score : "-" %></td>
+    </tr>
+  </table>
 
-<p>
-  <%= link_to "logout", destroy_user_session_path, method: :delete,class: "glyphicon glyphicon-log-out"  %>
-  <%= link_to "changePassword", edit_user_registration_path, class: "glyphicon glyphicon-log-out"  %>
-</p>
-
-
-<p>username : <%= @user.username %></p>
-<p>player_id : <%= @user.player_id ? @user.player_id : "-" %></p>
-<p>player_name : <%= @user.player_name ? @user.player_name : "-" %></p>
-<p>volforce : <%= @user.volforce ? @user.volforce : "-" %></p>
-<p>arena_rank : <%= @user.arena_rank ? @user.arena_rank : "-" %></p>
-<p>arena_score : <%= @user.arena_score ? @user.arena_score : "-" %></p>
+  <h2>EXスコア情報</h2>
+  <p><%= link_to '楽曲別EXスコア一覧', '#', class: "btn btn-primary" %></p>
+  <p>WIP</p>
+  <h3>総S-PUC(MAX)数</h3>
+  <h3>レベル別S-PUC(MAX)数</h3>
+  <p>おりたたみ</p>
+</article>

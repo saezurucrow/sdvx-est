@@ -2,7 +2,7 @@
 
 class UpdateUserColumns < ActiveRecord::Migration[6.1]
   def change
-    add_column :users, :setting_at, :integer
+    add_column :users, :setting_id, :integer
     add_column :users, :deleted, :boolean, null: false, default: false
     add_column :users, :deleted_at, :integer
     add_column :users, :admin, :boolean, null: false, default: false

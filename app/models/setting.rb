@@ -4,7 +4,7 @@ class Setting < ApplicationRecord
   has_one :user
 
   enum opened: {
-    public: 0,
-    private: 1
+    publiced: 0,
+    privated: 1
   }
 end

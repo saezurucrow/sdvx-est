@@ -18,3 +18,4 @@ services:
       - "3306:3306"
     volumes:
       - ./tmp/db:/var/lib/mysql
+      - ./db/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf

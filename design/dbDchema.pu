@@ -19,12 +19,11 @@ entity User {
 }
 ' (op)rivalData
 
+' # TODO: 正規化
 entity Song {
   id: number (pk)
   --
   name: string
-  artist: string
-  version: number
   level: number
   difficult: number(enum)
   maxExScore: number

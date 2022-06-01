@@ -34,6 +34,8 @@ class User < ApplicationRecord
     D4: 20
   }
 
+  validates :username, format: { with: /\A\w{4,}$\z/, message: 'は有効ではありません' }
+
   def email_required?
     false
   end

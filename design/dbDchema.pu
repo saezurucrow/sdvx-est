@@ -10,7 +10,7 @@ entity User {
   playerName: string
   volforce: float
   arenaRank: number(enum)
-  arenaScore: number
+  ultimateScore: number
   deleted: boolean
   createdAt: date
   updatedAt: date

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Song < ApplicationRecord
+  has_many :ex_scores
+  has_many :ex_score_differences
+
   enum difficult: {
     NOV: 0,
     ADV: 1,

@@ -19,7 +19,7 @@ entity User {
 }
 ' (op)rivalData
 
-entity Songs {
+entity Song {
   id: number (pk)
   --
   name: string
@@ -74,14 +74,13 @@ entity Setting {
   opened: number (enum)
 }
 
-Setting }o-- User
-User }o-- UploadStatus
-User }o-- ExScore
-User }o-- ExScoreDifference
+Setting ---- User
+User --o{ UploadStatus
+User --o{ ExScore
 
-Song }o-- ExScore
-Song }o-- ExScoreDifference
+Song --o{ ExScore
+Song --o{ ExScoreDifference
 
-UploadStatus }o-- ExScoreDifference
+UploadStatus --o{ ExScoreDifference
 
 @enduml

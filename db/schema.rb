@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_01_110315) do
+ActiveRecord::Schema.define(version: 2022_06_01_114905) do
 
   create_table "ex_score_differences", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.integer "song_id", null: false
     t.integer "upload_status_id", null: false
     t.integer "before_ex_score", null: false

@@ -6,17 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:username]
 
-  def email_required?
-    false
-  end
-
-  def email_changed?
-    false
-  end
-
-  def will_save_change_to_email?
-    false
-  end
+  belongs_to :setting
+  has_many :ex_scores
+  has_many :upload_statuses
 
   enum arena_rank: {
     ULTEMATE: 0,
@@ -41,4 +33,16 @@ class User < ApplicationRecord
     D3: 19,
     D4: 20
   }
+
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
+
+  def will_save_change_to_email?
+    false
+  end
 end

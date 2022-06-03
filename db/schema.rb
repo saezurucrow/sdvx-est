@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_03_122859) do
+ActiveRecord::Schema.define(version: 2022_06_03_132501) do
 
   create_table "ex_score_differences", charset: "utf8mb4", force: :cascade do |t|
     t.integer "song_id", null: false
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 2022_06_03_122859) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "deleted", default: false, null: false
     t.integer "deleted_at"
-    t.boolean "admin", default: false, null: false
     t.boolean "is_admin", default: false
     t.integer "opened", default: 0, null: false
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

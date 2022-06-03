@@ -16,6 +16,7 @@ entity User {
   updatedAt: date
   deletedAt: date
   isAdmin: boolean
+  opened: number(enum)
 }
 ' (op)rivalData
 
@@ -66,14 +67,6 @@ entity ExScoreDifference {
   updatedAt: date
 }
 
-' 公開設定
-entity Setting {
-  id: number (pk)
-  --
-  opened: number (enum)
-}
-
-Setting ---- User
 User --o{ UploadStatus
 User --o{ ExScore
 

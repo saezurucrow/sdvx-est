@@ -6,7 +6,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:username]
 
-  belongs_to :setting
   has_many :ex_scores
   has_many :upload_statuses
 
@@ -32,6 +31,11 @@ class User < ApplicationRecord
     D2: 18,
     D3: 19,
     D4: 20
+  }
+
+  enum opened: {
+    publiced: 0,
+    privated: 1
   }
 
   validates :username, format: { with: /\A\w{4,}$\z/, message: 'は有効ではありません' }

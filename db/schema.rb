@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_03_132501) do
+ActiveRecord::Schema.define(version: 2022_06_05_015623) do
 
   create_table "ex_score_differences", charset: "utf8mb4", force: :cascade do |t|
     t.integer "song_id", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2022_06_03_132501) do
 
   create_table "upload_statuses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "upload_score_count", default: 0, null: false
+    t.integer "upload_score_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

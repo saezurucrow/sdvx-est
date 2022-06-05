@@ -9,6 +9,8 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    stdin_open: true
+    tty: true
   db:
     image: mysql:5.7
     environment:

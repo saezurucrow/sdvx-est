@@ -6,12 +6,8 @@
       <td><%= @user.username %></td>
     </tr>
     <tr>
-      <td>PLAYER ID</td>
-      <td><%= @user.player_id ? @user.player_id : "-" %></td>
-    </tr>
-    <tr>
-      <td>PLAYER NAME</td>
-      <td><%= @user.player_name ? @user.player_name : "-" %></td>
+      <td>スコア公開情報</td>
+      <td><%= @user.opened == 'publiced' ? '公開' : '非公開' %></td>
     </tr>
   </table>
 

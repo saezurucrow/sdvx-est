@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_05_080818) do
+ActiveRecord::Schema.define(version: 2022_06_05_103402) do
 
   create_table "ex_score_differences", charset: "utf8mb4", force: :cascade do |t|
     t.integer "ex_score_id", null: false
@@ -59,7 +59,8 @@ ActiveRecord::Schema.define(version: 2022_06_05_080818) do
     t.boolean "deleted", default: false, null: false
     t.integer "deleted_at"
     t.boolean "is_admin", default: false
-    t.integer "opened", default: 0, null: false
+    t.integer "score_opened", default: 0, null: false
+    t.integer "ranking_opened", default: 0, null: false
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

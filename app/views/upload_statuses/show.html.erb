@@ -1,0 +1,24 @@
+<h2>更新差分</h2>
+
+<p>更新日: <%= @upload_status.created_at.to_s(:datetime_jp) %></p>
+<p>更新件数: <%= @upload_status.upload_score_count %>件</p>
+
+<% if @upload_status.upload_score_count > 0 %>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#show">詳細</button>
+  <div id="show" class="collapse" style="padding-top: 1rem;">
+    <% @upload_status.ex_score_differences.each do |ex_score_difference| %>
+      <div class="card">
+        <div class="card-body">
+          <%# TODO: titleをクリックしたら曲別ランキングページへ遷移 %>
+          <h6 class="card-title"><%= ex_score_difference.ex_score.song.name %> [<%= ex_score_difference.ex_score.song.difficult %>]</h6>
+          <p class="card-text">
+            スコア: <%= ex_score_difference.before_ex_score %> → <%= ex_score_difference.after_ex_score %> (+<%= ex_score_difference.after_ex_score - ex_score_difference.before_ex_score  %>)
+            <% if ex_score_difference.ex_score.song.max_ex_score > 0 %>
+              [MAX-<%= ex_score_difference.ex_score.song.max_ex_score - ex_score_difference.after_ex_score %>]
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

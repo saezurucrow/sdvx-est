@@ -3,16 +3,10 @@
 require 'csv'
 
 if Rails.env != 'production' && (User.count === 0)
-  # create Setting
-  Setting.create!(
-    opened: 1
-  )
-
   # create User
   User.create!(
     username: 'chirping_crow',
-    password: 'hogehoge',
-    setting_id: 1
+    password: 'hogehoge'
   )
   user.save!
 end

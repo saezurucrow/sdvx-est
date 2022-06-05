@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'ex_scores/level_select'
   get 'ex_scores/level_select/:id', to: 'ex_scores#level_show'
   resources :ex_scores, only: %i[new create]
+
+  resources :upload_statuses
 end

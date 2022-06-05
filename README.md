@@ -1,5 +1,4 @@
-# README
-
+# SDVX-EST
 ## 技術スタック
 - Ruby 2.7.5
 - Rails 6.1.4
@@ -11,6 +10,8 @@
 
 ```sh
 $ docker-compose build
+$ docker-compose run --rm web rails db:migrate
+$ docker-compose run --rm web rails db:seed
 ```
 
 ### start up

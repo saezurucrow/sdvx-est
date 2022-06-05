@@ -15,8 +15,8 @@ class User < ApplicationRecord
   }
 
   enum ranking_opened: {
-    publiced: 0,
-    privated: 1
+    open: 0,
+    close: 1
   }
 
   validates :username, format: { with: /\A\w{4,}$\z/, message: 'は有効ではありません' }

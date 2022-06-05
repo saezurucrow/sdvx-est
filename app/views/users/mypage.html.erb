@@ -6,15 +6,36 @@
       <td><%= @user.username %></td>
     </tr>
     <tr>
-      <td>スコア公開情報</td>
-      <td><%= @user.opened == 'publiced' ? '公開' : '非公開' %></td>
+      <td>スコア公開設定</td>
+      <td><%= @user.score_opened == 'publiced' ? '公開' : '非公開' %></td>
+    </tr>
+    <tr>
+      <td>ランキング公開設定</td>
+      <td><%= @user.ranking_opened == 'open' ? '公開' : '非公開' %></td>
     </tr>
   </table>
 
   <h2>EXスコア情報</h2>
   <p><%= link_to '楽曲別EXスコア一覧', '#', class: "btn btn-primary" %></p>
-  <p>WIP</p>
+
   <h3>総S-PUC(MAX)数</h3>
-  <h3>レベル別S-PUC(MAX)数</h3>
-  <p>おりたたみ</p>
+  <p><%= @s_puc_count %></p>
+
+  <% if @s_puc_count > 0 %>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#show">レベル別S-PUC(MAX)数</button>
+    <div id="show" class="collapse" style="padding-top: 1rem;">
+      <table>
+        <tr>
+          <td>レベル</td>
+          <td>個数</td>
+        </tr>
+        <%  @user.ex_scores.s_puc_count_by_level(@user.id).each do |key, value| %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= value %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
 </article>

@@ -10,15 +10,15 @@
 
   <div class="form-group">
     <%= f.label :スコア公開設定 %> <br />
-    <%= f.radio_button :opened, :publiced %> 公開
-    <%= f.radio_button :opened, :privated %> 非公開
+    <%= f.radio_button :score_opened, :publiced %> 公開
+    <%= f.radio_button :score_opened, :privated %> 非公開
     <small id="openedHelp" class="form-text text-muted">非公開にした場合、マイページにはusernameのみ公開されます</small>
   </div>
 
-    <div class="form-group">
+  <div class="form-group">
     <%= f.label :ランキング公開設定 %> <br />
-    <%= f.radio_button :opened, :publiced %> 公開
-    <%= f.radio_button :opened, :privated %> 非公開
+    <%= f.radio_button :ranking_opened, :open %> 公開
+    <%= f.radio_button :ranking_opened, :close %> 非公開
     <small id="openedHelp" class="form-text text-muted">非公開にした場合、ランキングページでは数値のみ公開されます</small>
   </div>
   

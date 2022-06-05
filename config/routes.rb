@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   resources :ex_scores, only: %i[new create]
 
   resources :upload_statuses
+
+  get '*path', to: 'application#render_404'
 end

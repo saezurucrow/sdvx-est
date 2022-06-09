@@ -29,10 +29,10 @@
           <td>レベル</td>
           <td>個数</td>
         </tr>
-        <%  @user.ex_scores.s_puc_count_by_level(@user.id).each do |key, value| %>
+        <% @user.ex_scores.s_puc_count_by_level(@user.id).each do |key, value| %>
           <tr>
             <td><%= key %></td>
-            <td><%= value %></td>
+            <td><%= value %> <span class="text-muted" style="font-size: 8px;">/ <%= Song.where(level: key).count %></span></td>
           </tr>
         <% end %>
       </table>

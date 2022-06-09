@@ -1,2 +1,37 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<article class="markdown-body">
+  <h1>ユーザー詳細</h1>
+  <table>
+    <tr>
+      <td>username</td>
+      <td><%= @user.username %></td>
+    </tr>
+  </table>
+
+  <h2>EXスコア情報</h2>
+  <% if @user.score_opened == 'publiced' %>
+    <p><%= link_to '楽曲別EXスコア一覧', '#', class: "btn btn-primary" %></p>
+
+    <h3>総S-PUC(MAX)数</h3>
+    <p><%= @s_puc_count %></p>
+
+    <% if @s_puc_count > 0 %>
+      <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#show">レベル別S-PUC(MAX)数</button>
+      <div id="show" class="collapse" style="padding-top: 1rem;">
+        <table>
+          <tr>
+            <td>レベル</td>
+            <td>個数</td>
+          </tr>
+          <% @user.ex_scores.s_puc_count_by_level(@user.id).each do |key, value| %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= value %> <span class="text-muted" style="font-size: 8px;">/ <%= Song.where(level: key).count %></span></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+  <% else %>
+    <p>スコア情報が非公開に設定されています</p>
+  <% end %>
+</article>

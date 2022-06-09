@@ -1,0 +1,10 @@
+<p>閲覧するレベルを選択してください。</p>
+
+<%= form_with url: ex_scores_level_select_path(user_id: @user.id) do |f| %>
+  <div class="form-group">
+    <%= f.select :level, @select_level, class: 'form-select' %>
+    <%= f.submit "選択", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<hr>

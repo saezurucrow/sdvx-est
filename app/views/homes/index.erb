@@ -5,6 +5,7 @@
     『<a href="https://p.eagate.573.jp/game/sdvx/vi/index.html">SOUND VOLTEX EXCEED GEAR<a>』の非公式EXスコアツールです。
   </p>
   <p>このスコアツールを使うことでEXスコアの管理やランキングの確認ができます。(CSVでのスコア登録になるので、プレミアムコースの加入が必須となります。)</p>
+  <p>現在はEXHAUST以上の譜面の管理ができるようになっております。</p>
   <p>
     EST は <b>E</b>x<b>S</b>core <b>T</b>ool の頭文字です。 
   </p>
@@ -13,13 +14,19 @@
   <p><a href='/howto'>こちら</a>を参照ください。<p>
 
   <h2>統計情報</h2>
-  <p>WIP<p>
-
-  <h2>更新情報</h2>
-  <p>WIP<p>
+  <table>
+    <tr>
+      <td>登録者数</td>
+      <td><%= @all_user_count %></td>
+    </tr>
+    <tr>
+      <td>登録譜面数</td>
+      <td><%= @song_user_count %></td>
+    </tr>
+  </table>
 
   <h2>お問い合わせ</h2>
-  <p>不具合報告や要望等は<a href="https://twitter.com/sdvx_EXtool">公式Twitter</a>のDMやリプライにて受け付けております。<p>
+  <p>不具合報告、要望等は<a href="https://twitter.com/sdvx_EXtool">公式Twitter</a>のDMやリプライにて受け付けております。<p>
 
   <h2>作った人</h2>
   <p>てんあ (twitter: <a href="https://twitter.com/chirping_crow">@chirping_crow</a>)</p>

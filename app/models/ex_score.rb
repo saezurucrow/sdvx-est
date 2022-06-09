@@ -29,6 +29,9 @@ class ExScore < ApplicationRecord
       CSV.foreach(csv, headers: true, liberal_parsing: true) do |row|
         next if row['EXスコア'] == '0' || row.blank?
 
+        # TODO: 青、黄譜面も対応させる
+        next if row['難易度'] == 'NOVICE' || row['難易度'] == 'ADVANCED'
+
         song = Song.find_by(name: row['楽曲名'], level: row['楽曲レベル'])
         next if song.nil?
 

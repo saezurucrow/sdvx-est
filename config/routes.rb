@@ -10,11 +10,12 @@ Rails.application.routes.draw do
   get 'users/mypage'
   resources :users
 
-  post 'ex_scores/:user_id/level_select', to: 'ex_scores#level_select', as: 'ex_scores_level_select'
-  get 'ex_scores/:user_id/level_select/:id', to: 'ex_scores#level_show', as: 'ex_scores_level_show'
-  resources :ex_scores, only: %i[index new create]
-
-  resources :upload_statuses
+  namespace :users do
+    get ':user_id/ex_scores', to: 'ex_scores#index', as: 'ex_scores'
+    get ':user_id/ex_scores/:id', to: 'ex_scores#show', as: 'ex_score'
+    resources :ex_scores, only: %i[new create]
+    resources :upload_statuses
+  end
 
   get '*path', to: 'application#render_404'
 end

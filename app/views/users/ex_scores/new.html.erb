@@ -4,7 +4,7 @@
 <p>EXスコアが記載されているデータのみ追加されます</p>
 <p>プレミアムコースの登録が必須になります</p>
 
-<%= form_with url: ex_scores_path do |f| %>
+<%= form_with url: users_ex_scores_path do |f| %>
   <div class="form-group">
     <%= f.text_area :ex_score, autofocus: true, class: "form-control", style: "height: 300px;", required: true %>
     <small id="exscoreHelp" class="form-text text-muted">コピーしたCSVスコアデータを貼り付けてください</small>

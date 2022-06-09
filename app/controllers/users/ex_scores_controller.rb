@@ -1,23 +1,14 @@
-class ExScoresController < ApplicationController
+class Users::ExScoresController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
   # スコア非公開の設定をしている場合ユーザー詳細にリダイレクトするように
 
   # レベル選択
   def index
     @user = User.find(params[:user_id])
-    @select_level = %w[8 9 10 11 12 13 14 15 16 17 18 19 20]
+    @ex_scores = ExScore.where(user_id: params[:user_id])
   end
 
-  def level_select
-    redirect_to ex_scores_level_show_path(id: params[:level], user_id: params[:user_id])
-  end
-
-  # レベル別ExScore一覧
-  def level_show
-    @level = params[:id]
-    @user = User.find(params[:user_id])
-    @select_level = %w[8 9 10 11 12 13 14 15 16 17 18 19 20]
-  end
+  def show; end
 
   # ExScore登録ページ
   def new; end
@@ -48,6 +39,6 @@ class ExScoresController < ApplicationController
 
     # 差分詳細ページへ遷移
     flash.now[:notice] = 'スコアが登録されました'
-    redirect_to upload_status_path(upload_status_id)
+    redirect_to users_upload_status_path(upload_status_id)
   end
 end

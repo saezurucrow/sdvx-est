@@ -40,6 +40,7 @@ entity ExScore {
   songId: number (fk)
   exScore: number
   playCount: number
+  maxMinus: number
   createdAt: date
   updatedAt: date
 }

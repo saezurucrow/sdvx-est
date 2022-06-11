@@ -36,7 +36,6 @@ class ExScore < ApplicationRecord
         next if song.nil?
 
         ex_score = ExScore.find_by(user_id: user, song_id: song.id)
-        max = (song.max_ex_score - row['EXスコア'].to_i) == 0
 
         if ex_score.nil?
           ex_score = ExScore.new(
@@ -44,7 +43,7 @@ class ExScore < ApplicationRecord
             song_id: song.id,
             ex_score: row['EXスコア'],
             play_count: row['プレー回数'],
-            max: max
+            max_minus: song.max_ex_score - row['EXスコア'].to_i
           )
           ex_score.save!
           ExScoreDifference.create!(
@@ -60,7 +59,7 @@ class ExScore < ApplicationRecord
           ex_score.update!(
             ex_score: row['EXスコア'],
             play_count: row['プレー回数'],
-            max: max
+            max_minus: song.max_ex_score - row['EXスコア'].to_i
           )
           ExScoreDifference.create!(
             ex_score_id: ex_score.id,
@@ -81,10 +80,10 @@ class ExScore < ApplicationRecord
   end
 
   def self.s_puc_count(user_id)
-    ExScore.where(user_id: user_id, max: true).count
+    ExScore.where(user_id: user_id, max_minus: 0).count
   end
 
   def self.s_puc_count_by_level(user_id)
-    ExScore.joins(:song).where(user_id: user_id, max: true).group('songs.level').count
+    ExScore.joins(:song).where(user_id: user_id, max_minus: 0).group('songs.level').count
   end
 end

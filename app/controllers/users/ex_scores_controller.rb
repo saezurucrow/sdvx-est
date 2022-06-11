@@ -4,7 +4,8 @@ class Users::ExScoresController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @ex_scores = ExScore.where(user_id: params[:user_id]).includes(:song).order(:updated_at).page(params[:page])
+    @q = ExScore.where(user_id: params[:user_id]).includes(:song).page(params[:page]).ransack(params[:q])
+    @ex_scores = @q.result
   end
 
   def show; end

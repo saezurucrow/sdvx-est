@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_05_122514) do
+ActiveRecord::Schema.define(version: 2022_06_11_135431) do
 
   create_table "ex_score_differences", charset: "utf8mb4", force: :cascade do |t|
     t.integer "ex_score_id", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2022_06_05_122514) do
     t.integer "play_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "max", default: false, null: false
+    t.integer "max_minus", default: -1, null: false
   end
 
   create_table "songs", charset: "utf8mb4", force: :cascade do |t|

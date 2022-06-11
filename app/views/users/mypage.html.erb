@@ -16,7 +16,12 @@
   </table>
 
   <h2>EXスコア情報</h2>
-  <p><%= link_to '楽曲別EXスコア一覧', users_ex_scores_path(user_id: @user.id), class: "btn btn-primary" %></p>
+  <% if @user.ex_scores.count > 0 %>
+    <p><%= link_to '楽曲別EXスコア一覧', users_ex_scores_index_path(user_id: @user.id), class: "btn btn-primary" %></p>
+  <% else %>
+    <p>スコアがまだ登録されていません</p>
+    <p>スコア登録は<%= link_to 'こちら', users_ex_scores_new_path %>から。</p>
+  <% end %>
 
   <h3>総S-PUC(MAX)数</h3>
   <p><%= @s_puc_count %></p>

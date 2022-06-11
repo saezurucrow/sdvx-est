@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   resources :users
 
   namespace :users do
-    get ':user_id/ex_scores', to: 'ex_scores#index', as: 'ex_scores'
-    get ':user_id/ex_scores/:id', to: 'ex_scores#show', as: 'ex_score'
-    resources :ex_scores, only: %i[new create]
+    get ':user_id/ex_scores', to: 'ex_scores#index', as: 'ex_scores_index'
+    get ':user_id/ex_scores/:id', to: 'ex_scores#show', as: 'ex_score_show'
+    post 'ex_scores', to: 'ex_scores#create'
+    get 'ex_scores/new', to: 'ex_scores#new'
     resources :upload_statuses
   end
 

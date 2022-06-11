@@ -8,6 +8,7 @@ class ExScore < ApplicationRecord
   has_many :ex_score_difference
 
   EX_SCORE_CSV_HEADER = ['楽曲名', '難易度', '楽曲レベル', 'クリアランク', 'スコアグレード', 'ハイスコア', 'EXスコア', 'プレー回数', 'クリア回数', 'ULTIMATE CHAIN', 'PERFECT']
+  EX_SCORE_SONG_DIFFICULT = %w[NOVICE ADVANCED EXHAUST INFINITE GRAVITY MAXIMUM HEAVENLY VIVID EXCEED]
 
   def self.conversion_csv(text, user_id)
     File.open("tmp/ex_score_#{user_id}.csv", 'w') do |file|
@@ -32,7 +33,7 @@ class ExScore < ApplicationRecord
         # TODO: 青、黄譜面も対応させる
         next if row['難易度'] == 'NOVICE' || row['難易度'] == 'ADVANCED'
 
-        song = Song.find_by(name: row['楽曲名'], level: row['楽曲レベル'])
+        song = Song.find_by(name: row['楽曲名'], level: row['楽曲レベル'], difficult: EX_SCORE_SONG_DIFFICULT.index(row['難易度']))
         next if song.nil?
 
         ex_score = ExScore.find_by(user_id: user, song_id: song.id)

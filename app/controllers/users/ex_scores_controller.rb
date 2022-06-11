@@ -1,9 +1,10 @@
 class Users::ExScoresController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
-  # スコア非公開の設定をしている場合ユーザー詳細にリダイレクトするように
 
   def index
     @user = User.find(params[:user_id])
+    redirect_to users_mypage_path, alert: 'scoreが非公開に設定されています' if @user != current_user && @user.score_opened == 'privated'
+
     @q = ExScore.where(user_id: params[:user_id]).includes(:song).page(params[:page]).ransack(params[:q])
     @ex_scores = @q.result
   end
@@ -38,7 +39,6 @@ class Users::ExScoresController < ApplicationController
     File.delete("tmp/ex_score_#{current_user.id}.csv")
 
     # 差分詳細ページへ遷移
-    flash.now[:notice] = 'スコアが登録されました'
-    redirect_to users_upload_status_path(upload_status_id)
+    redirect_to users_upload_status_path(upload_status_id), notice: 'スコアが登録されました'
   end
 end

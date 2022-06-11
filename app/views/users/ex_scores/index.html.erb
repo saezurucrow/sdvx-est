@@ -1,2 +1,26 @@
 <h2>EXスコア一覧</h2>
 
+<table class="table table-sm">
+  <thead class="sticky-top bg-white" style="top: 56px;">
+    <tr style="font-size: 12px;">
+      <th scope="col">曲名</th>
+      <th scope="col">難易度</th>
+      <th scope="col">Lv</th>
+      <th scope="col">EX Score</th>
+      <th scope="col">MAX-</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ex_scores.each do |ex_score| %>
+      <tr>
+        <td style="word-break: break-word;"><%= ex_score.song.name %></td>
+        <td><%= ex_score.song.difficult %></td>
+        <td><%= ex_score.song.level %></td>
+        <td><%= ex_score.ex_score %></td>
+        <td><%= ex_score.song.max_ex_score === -1 ? '-' : ex_score.song.max_ex_score - ex_score.ex_score  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @ex_scores, window: 1 %>

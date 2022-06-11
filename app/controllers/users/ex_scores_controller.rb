@@ -2,10 +2,9 @@ class Users::ExScoresController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
   # スコア非公開の設定をしている場合ユーザー詳細にリダイレクトするように
 
-  # レベル選択
   def index
     @user = User.find(params[:user_id])
-    @ex_scores = ExScore.where(user_id: params[:user_id])
+    @ex_scores = ExScore.where(user_id: params[:user_id]).includes(:song).order(:updated_at).page(params[:page])
   end
 
   def show; end

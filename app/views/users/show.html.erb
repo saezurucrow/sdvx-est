@@ -9,7 +9,7 @@
 
   <h2>EXスコア情報</h2>
   <% if @user.score_opened == 'publiced' %>
-    <p><%= link_to '楽曲別EXスコア一覧', users_ex_scores_path(user_id: @user.id), class: "btn btn-primary" %></p>
+    <p><%= link_to '楽曲別EXスコア一覧', users_ex_scores_index_path(user_id: @user.id), class: "btn btn-primary" %></p>
 
     <h3>総S-PUC(MAX)数</h3>
     <p><%= @s_puc_count %></p>

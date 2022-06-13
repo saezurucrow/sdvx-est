@@ -10,7 +10,7 @@
       <div class="card">
         <div class="card-body">
           <%# TODO: titleをクリックしたら曲別ランキングページへ遷移 %>
-          <h6 class="card-title"><%= ex_score_difference.ex_score.song.name %> [<%= ex_score_difference.ex_score.song.difficult %>]</h6>
+          <h6 class="card-title"><%= ex_score_difference.ex_score.song.name %> <span class="badge badge-bg-<%= ex_score_difference.ex_score.song.difficult %>"><%= ex_score_difference.ex_score.song.difficult %></span></h6>
           <p class="card-text">
             スコア: <%= ex_score_difference.before_ex_score %> → <%= ex_score_difference.after_ex_score %> (+<%= ex_score_difference.after_ex_score - ex_score_difference.before_ex_score  %>)
             <% if ex_score_difference.ex_score.song.max_ex_score > 0 %>

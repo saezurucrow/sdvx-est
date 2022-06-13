@@ -18,7 +18,7 @@
     <% @ex_scores.each do |ex_score| %>
     <tr>
       <td style="word-break: break-word;"><%= ex_score.song.name %></td>
-      <td><%= ex_score.song.difficult %></td>
+      <td><span class="badge badge-bg-<%= ex_score.song.difficult %>"><%= ex_score.song.difficult %></span></td>
       <td><%= ex_score.song.level %></td>
       <td><%= ex_score.ex_score %></td>
       <td>-<%= ex_score.song.max_ex_score === -1 ? '' : ex_score.song.max_ex_score - ex_score.ex_score %></td>
@@ -29,6 +29,5 @@
 <% else %>
   <p>スコアがまだ登録されていません</p>
 <% end %>
-
 
 <%= paginate @ex_scores, window: 1 %>

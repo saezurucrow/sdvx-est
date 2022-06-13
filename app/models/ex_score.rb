@@ -43,7 +43,7 @@ class ExScore < ApplicationRecord
           ex_score = ExScore.new(
             user_id: user.id,
             song_id: song.id,
-            ex_score: row['EXスコア'],
+            ex_score: row['EXスコア'].to_i,
             play_count: row['プレー回数'],
             max_minus: song.max_ex_score - row['EXスコア'].to_i
           )
@@ -52,22 +52,22 @@ class ExScore < ApplicationRecord
             ex_score_id: ex_score.id,
             upload_status_id: upload_statuses.id,
             before_ex_score: 0,
-            after_ex_score: row['EXスコア']
+            after_ex_score: row['EXスコア'].to_i
           )
           upload_score_count += 1
         elsif ex_score.ex_score == row['EXスコア'].to_i
           ex_score.update!(play_count: row['プレー回数'])
         else
-          ex_score.update!(
-            ex_score: row['EXスコア'],
-            play_count: row['プレー回数'],
-            max_minus: song.max_ex_score - row['EXスコア'].to_i
-          )
           ExScoreDifference.create!(
             ex_score_id: ex_score.id,
             upload_status_id: upload_statuses.id,
             before_ex_score: ex_score.ex_score,
-            after_ex_score: row['EXスコア']
+            after_ex_score: row['EXスコア'].to_i
+          )
+          ex_score.update!(
+            ex_score: row['EXスコア'].to_i,
+            play_count: row['プレー回数'],
+            max_minus: song.max_ex_score - row['EXスコア'].to_i
           )
           upload_score_count += 1
         end

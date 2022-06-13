@@ -18,5 +18,9 @@ Rails.application.routes.draw do
     resources :upload_statuses
   end
 
+  get 'rankings/songs', to: 'rankings#index'
+  get 'rankings/songs/:id', to: 'rankings#show', as: 'ranking'
+  get 'rankings/max', to: 'rankings#max'
+
   get '*path', to: 'application#render_404'
 end

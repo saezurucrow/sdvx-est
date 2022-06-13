@@ -4,28 +4,28 @@
 <% end %>
 
 <% if @ex_scores.count > 0 %>
-<table class="table table-sm">
-  <thead class="sticky-top bg-white" style="top: 56px;">
-    <tr style="font-size: 12px;">
-      <th scope="col"><%= sort_link(@q, :song_name, "曲名")%></th>
-      <th scope="col"><%= sort_link(@q, :song_difficult, "難易度")%></th>
-      <th scope="col"><%= sort_link(@q, :song_level, "Lv")%></th>
-      <th scope="col"><%= sort_link(@q, :ex_score, "EX Score")%></th>
-      <th scope="col"><%= sort_link(@q, :max_minus, "MAX-") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @ex_scores.each do |ex_score| %>
-    <tr>
-      <td style="word-break: break-word;"><%= ex_score.song.name %></td>
-      <td><span class="badge badge-bg-<%= ex_score.song.difficult %>"><%= ex_score.song.difficult %></span></td>
-      <td><%= ex_score.song.level %></td>
-      <td><%= ex_score.ex_score %></td>
-      <td>-<%= ex_score.song.max_ex_score === -1 ? '' : ex_score.song.max_ex_score - ex_score.ex_score %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <table class="table table-sm">
+    <thead class="sticky-top bg-white" style="top: 56px;">
+      <tr style="font-size: 12px;">
+        <th scope="col"><%= sort_link(@q, :song_name, "曲名")%></th>
+        <th scope="col"><%= sort_link(@q, :song_difficult, "難易度")%></th>
+        <th scope="col"><%= sort_link(@q, :song_level, "Lv")%></th>
+        <th scope="col"><%= sort_link(@q, :ex_score, "EX Score")%></th>
+        <th scope="col"><%= sort_link(@q, :max_minus, "MAX-") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ex_scores.each do |ex_score| %>
+      <tr>
+        <td style="word-break: break-word;"><%= ex_score.song.name %></td>
+        <td><span class="badge badge-bg-<%= ex_score.song.difficult %>"><%= ex_score.song.difficult %></span></td>
+        <td><%= ex_score.song.level %></td>
+        <td><%= ex_score.ex_score %></td>
+        <td>-<%= ex_score.song.max_ex_score === -1 ? '' : ex_score.song.max_ex_score - ex_score.ex_score %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <p>スコアがまだ登録されていません</p>
 <% end %>

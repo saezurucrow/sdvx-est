@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   root 'homes#index'
+  get 'howto', to: 'homes#howto'
 
   devise_for :users, controllers: {
     registrations: 'users/registrations'

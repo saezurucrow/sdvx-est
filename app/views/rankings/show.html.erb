@@ -20,7 +20,9 @@
         <th scope="row"><%= index + 1 %></td>
         <td style="word-break: break-word;"><%= link_to ranking.user.username, user_path(ranking.user.id) %></td>
         <td><%= ranking.ex_score %></td>
-        <td>-<%= ranking.max_minus %></td>
+        <td>
+          <% if ranking.max_minus != 0 %>-<% end %><%= ranking.max_minus %>
+        </td>
         <td><%= ranking.updated_at.to_s(:datetime_jp) %></td>
       </tr>
     <% end %>

@@ -22,7 +22,9 @@
         <td><span class="badge badge-bg-<%= ex_score.song.difficult %>"><%= ex_score.song.difficult %></span></td>
         <td><%= ex_score.song.level %></td>
         <td><%= ex_score.ex_score %></td>
-        <td>-<%= ex_score.song.max_ex_score === -1 ? '' : ex_score.song.max_ex_score - ex_score.ex_score %></td>
+        <td>
+          <% if ex_score.max_minus != 0 %>-<% end %><%= ex_score.song.max_ex_score === -1 ? '' : ex_score.max_minus %>
+        </td>
       </tr>
       <% end %>
     </tbody>

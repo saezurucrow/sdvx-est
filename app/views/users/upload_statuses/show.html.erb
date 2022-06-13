@@ -13,7 +13,11 @@
           <p class="card-text">
             スコア: <%= ex_score_difference.before_ex_score %> → <%= ex_score_difference.after_ex_score %> (+<%= ex_score_difference.after_ex_score - ex_score_difference.before_ex_score  %>)
             <% if ex_score_difference.ex_score.song.max_ex_score > 0 %>
-              [MAX-<%= ex_score_difference.ex_score.song.max_ex_score - ex_score_difference.after_ex_score %>]
+              <% if ex_score_difference.ex_score.song.max_ex_score - ex_score_difference.after_ex_score == 0 %>
+                [MAX]
+              <% else %>
+                [MAX-<%= ex_score_difference.ex_score.song.max_ex_score - ex_score_difference.after_ex_score %>]
+              <% end %>
             <% end %>
           </p>
         </div>

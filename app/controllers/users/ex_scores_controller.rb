@@ -5,8 +5,9 @@ class Users::ExScoresController < ApplicationController
     @user = User.find(params[:user_id])
     redirect_to users_mypage_path, alert: 'scoreが非公開に設定されています' if @user != current_user && @user.score_opened == 'privated'
 
-    @q = ExScore.where(user_id: params[:user_id]).includes(:song).page(params[:page]).ransack(params[:q])
-    @ex_scores = @q.result
+    @q = ExScore.where(user_id: params[:user_id]).includes(:song).ransack(params[:q])
+    @result_count = @q.result.count
+    @ex_scores = @q.result.page(params[:page])
   end
 
   def show; end

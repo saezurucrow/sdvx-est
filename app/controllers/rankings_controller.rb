@@ -11,6 +11,6 @@ class RankingsController < ApplicationController
   end
 
   def max
-    @users = User.all.includes(%i[ex_scores upload_statuses]).sort_by { |user| -user.ex_scores.s_puc_count(user.id) }
+    @users = User.includes(%i[ex_scores upload_statuses]).where.not(upload_statuses: { id: nil }).sort_by { |user| -user.ex_scores.s_puc_count(user.id) }
   end
 end

@@ -53,7 +53,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <%= search_form_for @q, class: "form-group", url: users_ex_scores_index_path(user_id: current_user.id) do |f| %>
+      <%= search_form_for @q, class: "form-group", url: users_ex_scores_index_path(user_id: @user.id) do |f| %>
         <div class="modal-body">
           <div class="form-group">
             <label for="name">楽曲名</label>

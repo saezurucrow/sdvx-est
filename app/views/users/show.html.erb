@@ -1,11 +1,5 @@
 <article class="markdown-body">
-  <h1>ユーザー詳細</h1>
-  <table>
-    <tr>
-      <td>username</td>
-      <td><%= @user.username %></td>
-    </tr>
-  </table>
+  <h1><%= @user.username %></h1>
 
   <h2>EXスコア情報</h2>
   <% if @user.score_opened == 'publiced' %>

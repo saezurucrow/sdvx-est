@@ -1,6 +1,10 @@
 class Users::UploadStatusesController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @upload_statuses = UploadStatus.where(user_id: current_user.id)
+  end
+
   def show
     @upload_status = UploadStatus.includes(ex_score_differences: [{ ex_score: :song }]).find(params[:id])
     redirect_to(*path) if @upload_status.nil?

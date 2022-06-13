@@ -5,7 +5,12 @@
 
 <% if @ex_scores.count > 0 %>
   <table class="table table-sm">
-    <p style="text-align: right;">件数: <%= @result_count %>件</p>
+    <div style="display: flex; align-items: flex-end; margin-bottom: 1rem;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
+        絞り込み
+      </button>
+      <span style="margin-left: auto;">件数: <%= @result_count %>件</span>
+    </div>
     <thead class="sticky-top bg-white" style="top: 56px;">
       <tr style="font-size: 12px;">
         <th scope="col"><%= sort_link(@q, :song_name, "曲名")%></th>
@@ -30,7 +35,52 @@
     </tbody>
   </table>
 <% else %>
-  <p>スコアがまだ登録されていません</p>
+  <div style="display: flex; align-items: flex-end; margin-bottom: 1rem;">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
+      絞り込み
+    </button>
+    <span style="margin-left: auto;">件数: <%= @result_count %>件</span>
+  </div>
 <% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalTitle">絞り込み設定</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= search_form_for @q, class: "form-group", url: users_ex_scores_index_path(user_id: current_user.id) do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">楽曲名</label>
+            <%= f.search_field :song_name_cont, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="difficult">難易度</label><br />
+            <% Song.difficults.each do |difficult| %>
+              <%= f.check_box :song_difficult_eq_any, { multiple: true, include_hidden: false }, difficult[1] %>
+              <span style="margin-right: 0.6em;" class="badge badge-bg-<%= difficult[0] %>"><%= difficult[0] %></span>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <label for="level">Lv</label><br />
+            <% Song.array_levels.each do |level| %>
+              <%= f.check_box :song_level_eq_any, { multiple: true, include_hidden: false }, level %>
+              <span><%= level %></span>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit '検索', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <%= paginate @ex_scores, window: 1 %>

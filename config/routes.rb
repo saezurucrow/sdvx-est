@@ -15,8 +15,10 @@ Rails.application.routes.draw do
     get ':user_id/ex_scores/:id', to: 'ex_scores#show', as: 'ex_score_show'
     post 'ex_scores', to: 'ex_scores#create'
     get 'ex_scores/new', to: 'ex_scores#new'
-    resources :upload_statuses
+    resources :upload_statuses, only: [:show]
   end
+
+  get 'user_upload_statuses', to: 'users/upload_statuses#index', as: 'user_upload_statuses_index'
 
   get 'rankings/songs', to: 'rankings#index'
   get 'rankings/songs/:id', to: 'rankings#show', as: 'ranking'

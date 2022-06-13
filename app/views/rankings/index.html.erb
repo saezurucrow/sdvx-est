@@ -1,0 +1,33 @@
+<h2>スコアランキング</h2>
+
+<%= search_form_for @q, class: "form-group", url: rankings_songs_path do |f| %>
+  <div class="form-row">
+    <div class="col-9">
+      <%= f.search_field :name_cont, class: "form-control", placeholder: "曲名" %>
+    </div>
+    <div class="col-3">
+      <%= f.submit '検索', class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<table class="table table-sm">
+  <thead class="sticky-top bg-white" style="top: 56px;">
+    <tr style="font-size: 12px;">
+      <th scope="col"><%= sort_link(@q, :name, "曲名")%></th>
+      <th scope="col"><%= sort_link(@q, :difficult, "難易度")%></th>
+      <th scope="col"><%= sort_link(@q, :level, "Lv")%></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |song| %>
+      <tr>
+        <td style="word-break: break-word;"><%= link_to song.name, ranking_path(song.id) %></td>
+        <td><span class="badge badge-bg-<%= song.difficult %>"><%= song.difficult %></span></td>
+        <td><%= song.level %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @songs, window: 1 %>

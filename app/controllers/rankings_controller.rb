@@ -1,5 +1,8 @@
 class RankingsController < ApplicationController
-  def index; end
+  def index
+    @q = Song.all.page(params[:page]).ransack(params[:q])
+    @songs = @q.result
+  end
 
   def show
     @song = Song.find(params[:id])

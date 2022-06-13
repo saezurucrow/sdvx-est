@@ -17,7 +17,7 @@
     <tbody>
       <% @ex_scores.each do |ex_score| %>
       <tr>
-        <td style="word-break: break-word;"><%= ex_score.song.name %></td>
+        <td style="word-break: break-word;"><%= link_to ex_score.song.name, ranking_path(ex_score.song.id) %></td>
         <td><span class="badge badge-bg-<%= ex_score.song.difficult %>"><%= ex_score.song.difficult %></span></td>
         <td><%= ex_score.song.level %></td>
         <td><%= ex_score.ex_score %></td>

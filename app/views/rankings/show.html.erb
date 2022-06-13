@@ -1,0 +1,28 @@
+<div class="container" style="text-align: center;">
+  <h4 style="overflow-wrap: normal;"><%= @song.name %></h4>
+  <span class="badge badge-bg-<%= @song.difficult %>"><%= @song.difficult %></span>
+  <p>Lv. <%= @song.level %></p>
+</div>
+
+<table class="table table-sm">
+  <thead class="sticky-top bg-white" style="top: 56px;">
+    <tr style="font-size: 12px;">
+      <th scope="col">#</th>
+      <th scope="col">username</th>
+      <th scope="col">EX Score</th>
+      <th scope="col">MAX-</th>
+      <th scope="col">更新日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ranking.each.with_index do |ranking, index| %>
+      <tr style="<% if ranking.user == current_user %>background-color: #ffe69c;<% end %>">
+        <th scope="row"><%= index + 1 %></td>
+        <td style="word-break: break-word;"><%= link_to ranking.user.username, user_path(ranking.user.id) %></td>
+        <td><%= ranking.ex_score %></td>
+        <td>-<%= ranking.max_minus %></td>
+        <td><%= ranking.updated_at.to_s(:datetime_jp) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

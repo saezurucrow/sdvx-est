@@ -8,7 +8,10 @@ if Rails.env != 'production' && (User.count === 0)
     username: 'chirping_crow',
     password: 'hogehoge'
   )
-  user.save!
+  User.create!(
+    username: 'regi',
+    password: 'hogehoge'
+  )
 end
 
 # create Song
@@ -16,6 +19,9 @@ if Song.count === 0
   DIFFICULT = %w[NOVICE ADVANCED EXHAUST INFINITE GRAVITY MAXIMUM HEAVENLY VIVID EXCEED]
 
   CSV.foreach('db/song_data/rev_effect_id.csv', headers: true) do |row|
+    # TODO: データが収集できたら青、黄譜面も対応させる
+    next if row[1] == 'NOVICE' || row[1] == 'ADVANCED'
+
     Song.create!(
       name: row[0],
       difficult: DIFFICULT.find_index(row[1]),

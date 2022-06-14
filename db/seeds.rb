@@ -6,11 +6,13 @@ if Rails.env != 'production' && (User.count === 0)
   # create User
   User.create!(
     username: 'chirping_crow',
-    password: 'hogehoge'
+    password: 'hogehoge',
+    email: 'usobukuhito@gmail.com'
   )
   User.create!(
     username: 'regi',
-    password: 'hogehoge'
+    password: 'hogehoge',
+    email: 'asdf@gmail.com'
   )
 end
 

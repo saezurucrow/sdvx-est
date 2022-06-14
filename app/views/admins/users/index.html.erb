@@ -8,6 +8,7 @@
     <tr style="font-size: 12px;">
       <th scope="col"><%= sort_link(@q, :id, "id")%></th>
       <th scope="col"><%= sort_link(@q, :username, "username")%></th>
+      <th scope="col"><%= sort_link(@q, :email, "email")%></th>
       <th scope="col"><%= sort_link(@q, :score_opened, "スコア公開情報") %></th>
       <th scope="col"><%= sort_link(@q, :ranking_opened, "ランキング公開情報") %></th>
       <th scope="col"><%= sort_link(@q, :created_at, "作成日時")%></th>
@@ -20,6 +21,7 @@
     <tr>
       <td><%= user.id %></td>
       <td style="word-break: break-word;"><%= link_to user.username, edit_admins_user_path(user.id) %></td>
+      <td><%= user.email %></td>
       <td><%= user.score_opened %></td>
       <td><%= user.ranking_opened %></td>
       <td><%= user.created_at.to_s(:datetime_jp) %></td>

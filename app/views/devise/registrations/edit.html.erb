@@ -9,6 +9,12 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, autocomplete: "email", class: "form-control", required: true %>
+    <small id="emailHelp" class="form-text text-muted">パスワードの再設定に使用します。他のユーザーと同じemailは登録できません。</small>
+  </div>
+
+  <div class="form-group">
     <%= f.label :スコア公開設定 %> <br />
     <%= f.radio_button :score_opened, :publiced %> 公開
     <%= f.radio_button :score_opened, :privated %> 非公開

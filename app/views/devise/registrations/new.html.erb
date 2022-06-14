@@ -6,7 +6,13 @@
   <div class="form-group">
     <%= f.label :username %>
     <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control", required: true %>
-    <small id="usernameHelp" class="form-text text-muted">4文字以上で英数字とアンダースコア(_)のみ使用可能</small>
+    <small id="usernameHelp" class="form-text text-muted">4文字以上で英数字とアンダースコア(_)のみ使用可能です。他のユーザーと同じusernameは登録できません。</small>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, autocomplete: "email", class: "form-control", required: true %>
+    <small id="emailHelp" class="form-text text-muted">パスワードの再設定に使用します。他のユーザーと同じemailは登録できません。</small>
   </div>
 
   <div class="form-group">

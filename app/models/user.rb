@@ -19,7 +19,7 @@ class User < ApplicationRecord
     close: 1
   }
 
-  validates :username, format: { with: /\A\w{4,}$\z/, message: 'は有効ではありません' }
+  validates :username, presence: true, format: { with: /\A\w{4,}$\z/, message: 'は有効ではありません' }, uniqueness: true
 
   def email_required?
     false

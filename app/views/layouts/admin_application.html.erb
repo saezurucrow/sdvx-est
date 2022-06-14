@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SDVX-EST</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@3.0.1/github-markdown.min.css">
+  </head>
+
+  <body style="padding-top: 56px">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="/admins">SDVX-EST 管理者画面</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: flex-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to 'ユーザー管理', admins_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '楽曲管理', admins_songs_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '統計情報', '#', class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'TOPへ戻る', root_path, class: 'nav-link' %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container" style="padding-top: 1rem">
+      <% flash.each do |key, value| %>
+        <% if key === 'notice' %>
+          <%= content_tag(:div, value, class: "alert alert-success") %>
+        <% end %>
+        <% if key === 'alert' %>
+          <%= content_tag(:div, value, class: "alert alert-danger") %>
+        <% end %>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>

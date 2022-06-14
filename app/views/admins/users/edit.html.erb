@@ -1,0 +1,31 @@
+<h2><%= @user.username %> 編集</h2>
+
+<%= form_for @user, url: admins_user_path(@user.id) do |f| %>
+  <div class="form-group">
+    <%= f.label :username %>
+    <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control", required: true %>
+    <small id="usernameHelp" class="form-text text-muted">4文字以上で英数字とアンダースコア(_)のみ使用可能</small>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :スコア公開設定 %> <br />
+    <%= f.radio_button :score_opened, :publiced %> 公開
+    <%= f.radio_button :score_opened, :privated %> 非公開
+    <small id="openedHelp" class="form-text text-muted">非公開にした場合、マイページにはusernameのみ公開されます</small>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ランキング公開設定 %> <br />
+    <%= f.radio_button :ranking_opened, :open %> 公開
+    <%= f.radio_button :ranking_opened, :close %> 非公開
+    <small id="openedHelp" class="form-text text-muted">非公開にした場合、ランキングページでは数値のみ公開されます</small>
+  </div>
+
+  <div class="form-group" style="color: red;">
+    <%= f.label :BAN設定 %> <br />
+    <%= f.radio_button :deleted, :false %> 垢BANしない
+    <%= f.radio_button :deleted, :true %> 垢BANする
+  </div>
+
+  <%= f.submit "編集", class: "btn btn-primary" %>
+<% end %>

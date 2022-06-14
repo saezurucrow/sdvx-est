@@ -25,5 +25,11 @@ Rails.application.routes.draw do
   get 'rankings/songs/:id', to: 'rankings#show', as: 'ranking'
   get 'rankings/max', to: 'rankings#max'
 
+  namespace :admins do
+    get '/', to: 'users#index'
+    resources :users, only: %i[edit update]
+    resources :songs, only: %i[index new edit update delete]
+  end
+
   get '*path', to: 'application#render_404'
 end

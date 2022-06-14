@@ -1,2 +1,81 @@
-<h1>Admins::Songs#delete</h1>
-<p>Find me in app/views/admins/songs/delete.html.erb</p>
+<h2>楽曲一覧</h2>
+
+<p style="color: red;">楽曲をむやみに編集、削除するとユーザーに多大なる迷惑をかける可能性があります。</p>
+<p style="color: red;">楽曲を追加、編集、削除する際には必ずダブルチェックとTwitterへの報告を行ってください。</p>
+<p style="color: red;">慎重に。</p>
+
+<table class="table table-sm">
+  <div style="display: flex; align-items: flex-end; margin-bottom: 1rem;">
+    <%= link_to '新規作成', new_admins_song_path, class: "btn btn-primary" %>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal" style="margin-left: 1rem;">
+      絞り込み
+    </button>
+    <span style="margin-left: auto;">件数: <%= @result_count %>件</span>
+  </div>
+  <thead class="sticky-top bg-white" style="top: 56px;">
+    <tr style="font-size: 12px;">
+      <th scope="col"><%= sort_link(@q, :id, "id")%></th>
+      <th scope="col"><%= sort_link(@q, :name, "曲名")%></th>
+      <th scope="col"><%= sort_link(@q, :level, "Lv") %></th>
+      <th scope="col"><%= sort_link(@q, :difficult, "難易度") %></th>
+      <th scope="col"><%= sort_link(@q, :max_ex_score, "理論値")%></th>
+      <th scope="col"><%= sort_link(@q, :created_at, "作成日時")%></th>
+      <th scope="col"><%= sort_link(@q, :updated_at, "更新日時")%></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |song| %>
+    <tr>
+      <td><%= song.id %></td>
+      <td style="word-break: break-word;"><%= link_to song.name, edit_admins_song_path(song.id) %></td>
+      <td><%= song.level %></td>
+      <td><span class="badge badge-bg-<%= song.difficult %>"><%= song.difficult %></span></td>
+      <td><%= song.max_ex_score %></td>
+      <td><%= song.created_at.to_s(:datetime_jp) %></td>
+      <td><%= song.updated_at.to_s(:datetime_jp) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalTitle">絞り込み設定</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= search_form_for @q, class: "form-group", url: admins_songs_path do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">楽曲名</label>
+            <%= f.search_field :name_cont, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="difficult">難易度</label><br />
+            <% Song.difficults.each do |difficult| %>
+              <%= f.check_box :difficult_eq_any, { multiple: true, include_hidden: false }, difficult[1] %>
+              <span style="margin-right: 0.6em;" class="badge badge-bg-<%= difficult[0] %>"><%= difficult[0] %></span>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <label for="level">Lv</label><br />
+            <% Song.array_levels.each do |level| %>
+              <%= f.check_box :level_eq_any, { multiple: true, include_hidden: false }, level %>
+              <span><%= level %></span>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit '検索', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= paginate @songs, window: 1 %>

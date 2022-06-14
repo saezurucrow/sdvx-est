@@ -1,2 +1,25 @@
-<h1>Admins::Songs#new</h1>
-<p>Find me in app/views/admins/songs/new.html.erb</p>
+<h2>楽曲登録</h2>
+
+<%= form_for @song, url: admins_songs_path do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :difficult %>
+    <%= f.select :difficult, Song.difficults.keys.to_a, {}, {class: 'form-control'} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :level %>
+    <%= f.text_field :level, autocomplete: "level", class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :max_ex_score %>
+    <%= f.text_field :max_ex_score, autocomplete: "max_ex_score", class: "form-control", required: true %>
+  </div>
+
+  <%= f.submit "登録", class: "btn btn-primary" %>
+<% end %>

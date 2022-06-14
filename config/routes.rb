@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   namespace :admins do
     get '/', to: 'users#index'
     resources :users, only: %i[edit update]
-    resources :songs, only: %i[index new edit update delete]
+
+    resources :songs, only: %i[index new create edit update destroy]
   end
 
   get '*path', to: 'application#render_404'

@@ -1,2 +1,28 @@
-<h1>Admins::Songs#edit</h1>
-<p>Find me in app/views/admins/songs/edit.html.erb</p>
+<h2><%= @song.name %> <span class="badge badge-bg-<%= @song.difficult %>"><%= @song.difficult %></span></h2>
+
+<%= form_for @song, url: admins_song_path(@song.id) do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :difficult %>
+    <%= f.select :difficult, Song.difficults.keys.to_a, {}, {class: 'form-control'} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :level %>
+    <%= f.text_field :level, autocomplete: "level", class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :max_ex_score %>
+    <%= f.text_field :max_ex_score, autocomplete: "max_ex_score", class: "form-control", required: true %>
+  </div>
+
+  <%= f.submit "編集", class: "btn btn-primary" %>
+<% end %>
+
+<br />
+<%= link_to '削除', admins_song_path(@song.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>

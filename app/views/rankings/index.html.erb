@@ -1,4 +1,4 @@
-<h2>EXスコアランキング</h2>
+<h2>譜面一覧</h2>
 
 <table class="table table-sm">
   <div style="display: flex; align-items: flex-end; margin-bottom: 1rem;">
@@ -12,6 +12,7 @@
       <th scope="col"><%= sort_link(@q, :name, "曲名")%></th>
       <th scope="col"><%= sort_link(@q, :difficult, "難易度")%></th>
       <th scope="col"><%= sort_link(@q, :level, "Lv")%></th>
+      <th scope="col"><%= sort_link(@q, :max_ex_score, "MAX")%></th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,7 @@
         <td style="word-break: break-word;"><%= link_to song.name, ranking_path(song.id) %></td>
         <td><span class="badge badge-bg-<%= song.difficult %>"><%= song.difficult %></span></td>
         <td><%= song.level %></td>
+        <td><%= song.max_ex_score %></td>
       </tr>
     <% end %>
   </tbody>

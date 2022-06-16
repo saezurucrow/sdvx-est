@@ -5,8 +5,37 @@
   <% if @user.score_opened == 'publiced' %>
     <p><%= link_to '楽曲別EXスコア一覧', users_ex_scores_index_path(user_id: @user.id), class: "btn btn-primary" %></p>
 
-    <h3>総S-PUC(MAX)数</h3>
-    <p><%= @s_puc_count %></p>
+    <h3>割合分布</h3>
+    <table>
+      <tr>
+        <th></th>
+        <th>個数</th>
+      </tr>
+      <tr>
+        <td>MAX</td>
+        <td><%= @s_puc_count %></td>
+      </tr>
+      <tr>
+        <td>99%↑</td>
+        <td><%= @ex_scores.select { |ex_score| ex_score.percentage >= 0.9900 }.count %></td>
+      </tr>
+      <tr>
+        <td>98%↑</td>
+        <td><%= @ex_scores.select { |ex_score| ex_score.percentage >= 0.9800 }.count %></td>
+      </tr>
+      <tr>
+        <td>95%↑</td>
+        <td><%= @ex_scores.select { |ex_score| ex_score.percentage >= 0.9500 }.count %></td>
+      </tr>
+      <tr>
+        <td>90%↑</td>
+        <td><%= @ex_scores.select { |ex_score| ex_score.percentage >= 0.9000 }.count %></td>
+      </tr>
+      <tr>
+        <td>ALL</td>
+        <td><%= @ex_scores.count %></td>
+      </tr>
+    </table>
 
     <% if @s_puc_count > 0 %>
       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#show">レベル別S-PUC(MAX)数</button>

@@ -3,13 +3,15 @@ class UsersController < ApplicationController
 
   def mypage
     @user = current_user
-    @s_puc_count = @user.ex_scores.s_puc_count(current_user.id)
+    @ex_scores = @user.ex_scores
+    @s_puc_count = @ex_scores.s_puc_count(current_user.id)
   end
 
   def show
     @user = User.find(params[:id])
     redirect_to users_mypage_path if @user == current_user
 
-    @s_puc_count = @user.ex_scores.s_puc_count(params[:id])
+    @ex_scores = @user.ex_scores
+    @s_puc_count = @ex_scores.s_puc_count(params[:id])
   end
 end

@@ -46,7 +46,8 @@ class ExScore < ApplicationRecord
             song_id: song.id,
             ex_score: row['EXスコア'].to_i,
             play_count: row['プレー回数'],
-            max_minus: song.max_ex_score - row['EXスコア'].to_i
+            max_minus: song.max_ex_score - row['EXスコア'].to_i,
+            percentage: (row['EXスコア'].to_i / song.max_ex_score.to_f).round(4)
           )
           ex_score.save!
           ExScoreDifference.create!(
@@ -68,7 +69,8 @@ class ExScore < ApplicationRecord
           ex_score.update!(
             ex_score: row['EXスコア'].to_i,
             play_count: row['プレー回数'],
-            max_minus: song.max_ex_score - row['EXスコア'].to_i
+            max_minus: song.max_ex_score - row['EXスコア'].to_i,
+            percentage: (row['EXスコア'].to_i / song.max_ex_score.to_f).round(4)
           )
           upload_score_count += 1
         end

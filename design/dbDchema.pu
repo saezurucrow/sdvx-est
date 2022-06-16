@@ -41,6 +41,7 @@ entity ExScore {
   exScore: number
   playCount: number
   maxMinus: number
+  percentage: float
   createdAt: date
   updatedAt: date
 }

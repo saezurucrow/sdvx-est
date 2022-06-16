@@ -1,27 +1,39 @@
 <h3>更新差分詳細</h3>
 
 <p>更新日: <%= @upload_status.created_at.to_s(:datetime_jp) %></p>
-<p>更新件数: <%= @upload_status.upload_score_count %>件</p>
 
 <% if @upload_status.upload_score_count > 0 %>
-  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#show">詳細</button>
-  <div id="show" class="collapse" style="padding-top: 1rem;">
-    <% @upload_status.ex_score_differences.each do |ex_score_difference| %>
-      <div class="card">
-        <div class="card-body">
-          <h6 class="card-title"><%= link_to ex_score_difference.ex_score.song.name, ranking_path(ex_score_difference.ex_score.song.id) %> <span class="badge badge-bg-<%= ex_score_difference.ex_score.song.difficult %>"><%= ex_score_difference.ex_score.song.difficult %></span></h6>
-          <p class="card-text">
-            スコア: <%= ex_score_difference.before_ex_score %> → <%= ex_score_difference.after_ex_score %> (+<%= ex_score_difference.after_ex_score - ex_score_difference.before_ex_score  %>)
-            <% if ex_score_difference.ex_score.song.max_ex_score > 0 %>
-              <% if ex_score_difference.ex_score.song.max_ex_score - ex_score_difference.after_ex_score == 0 %>
-                [MAX]
-              <% else %>
-                [MAX-<%= ex_score_difference.ex_score.song.max_ex_score - ex_score_difference.after_ex_score %>]
-              <% end %>
-            <% end %>
-          </p>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <table class="table table-sm">
+    <div style="display: flex; align-items: flex-end; margin-bottom: 1rem;">
+      <span style="margin-left: auto;">件数: <%= @upload_status.upload_score_count %>件</span>
+    </div>
+    <thead class="sticky-top bg-white" style="top: 56px;">
+      <tr style="font-size: 12px;">
+        <th scope="col">曲名</th>
+        <th scope="col">難易度</th>
+        <th scope="col">Lv</th>
+        <th scope="col">更新前スコア</th>
+        <th scope="col">更新後スコア</th>
+        <th scope="col">差分</th>
+        <th scope="col">MAX-</th>
+        <th scope="col">%</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @upload_status.ex_score_differences.each do |ex_score_difference| %>
+      <tr>
+        <td style="word-break: break-word;"><%= link_to ex_score_difference.ex_score.song.name, ranking_path(ex_score_difference.ex_score.song.id) %></td>
+        <td><span class="badge badge-bg-<%= ex_score_difference.ex_score.song.difficult %>"><%= ex_score_difference.ex_score.song.difficult %></span></td>
+        <td><%= ex_score_difference.ex_score.song.level %></td>
+        <td><%= ex_score_difference.before_ex_score %></td>
+        <td><%= ex_score_difference.after_ex_score %></td>
+        <td style="color: red;">+<%= ex_score_difference.after_ex_score - ex_score_difference.before_ex_score %></td>
+        <td>
+          <% if ex_score_difference.ex_score.max_minus != 0 %>-<% end %><%= ex_score_difference.ex_score.song.max_ex_score === -1 ? '' : ex_score_difference.ex_score.max_minus %>
+        </td>
+        <td><%= (ex_score_difference.ex_score.percentage * 100).round(4) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table
 <% end %>

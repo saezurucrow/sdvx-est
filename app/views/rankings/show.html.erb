@@ -12,6 +12,7 @@
       <th scope="col">EX Score</th>
       <th scope="col">MAX-</th>
       <th scope="col">更新日時</th>
+      <th scope="col">%</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,7 @@
           <% if ranking.max_minus != 0 %>-<% end %><%= ranking.max_minus %>
         </td>
         <td><%= ranking.updated_at.to_s(:datetime_jp) %></td>
+        <td><%= (ranking.percentage * 100).round(4) %></td>
       </tr>
     <% end %>
   </tbody>

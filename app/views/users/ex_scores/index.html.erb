@@ -18,6 +18,7 @@
         <th scope="col"><%= sort_link(@q, :song_level, "Lv")%></th>
         <th scope="col"><%= sort_link(@q, :ex_score, "EX Score")%></th>
         <th scope="col"><%= sort_link(@q, :max_minus, "MAX-") %></th>
+        <th scope="col"><%= sort_link(@q, :percentage, "%") %></th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +31,7 @@
         <td>
           <% if ex_score.max_minus != 0 %>-<% end %><%= ex_score.song.max_ex_score === -1 ? '' : ex_score.max_minus %>
         </td>
+        <td><%= (ex_score.percentage * 100).round(4) %></td>
       </tr>
       <% end %>
     </tbody>

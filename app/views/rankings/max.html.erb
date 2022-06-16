@@ -16,7 +16,7 @@
       <tr style="<% if user == current_user %>background-color: #ffe69c;<% end %>">
         <th scope="row"><%= index + 1 %></td>
         <td style="word-break: break-word;">
-          <% if user.ranking_opened %>
+          <% if user.ranking_opened == 'open' || ranking.user == current_user %>
             <%= link_to user.username, user_path(user.id) %>
           <% else %>
             --

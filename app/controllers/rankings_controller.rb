@@ -1,13 +1,13 @@
 class RankingsController < ApplicationController
   def index
-    @q = Song.all.ransack(params[:q])
+    @q = Song.all.order(id: 'DESC').ransack(params[:q])
     @result_count = @q.result.count
     @songs = @q.result.page(params[:page])
   end
 
   def show
     @song = Song.find(params[:id])
-    @ranking = ExScore.where(song_id: @song.id).includes(:user).sort_by { |ex_score| -ex_score.ex_score }
+    @ranking = ExScore.where(song_id: @song.id).order(song_id: 'DESC').includes(:user).sort_by { |ex_score| -ex_score.ex_score }
   end
 
   def max

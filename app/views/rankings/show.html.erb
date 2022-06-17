@@ -31,7 +31,7 @@
           <% if ranking.max_minus != 0 %>-<% end %><%= ranking.max_minus %>
         </td>
         <td><%= ranking.updated_at.to_s(:datetime_jp) %></td>
-        <td><%= (ranking.percentage * 100).round(4) %></td>
+        <td><%= (ranking.percentage * 100).round(4) %>%</td>
       </tr>
     <% end %>
   </tbody>

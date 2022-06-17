@@ -31,7 +31,7 @@
         <td>
           <% if ex_score.max_minus != 0 %>-<% end %><%= ex_score.song.max_ex_score === -1 ? '' : ex_score.max_minus %>
         </td>
-        <td><%= (ex_score.percentage * 100).round(4) %></td>
+        <td><%= (ex_score.percentage * 100).round(4) %>%</td>
       </tr>
       <% end %>
     </tbody>

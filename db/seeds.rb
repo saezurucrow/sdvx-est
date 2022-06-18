@@ -19,7 +19,7 @@ end
 
 # create Song
 if Song.count === 0
-  DIFFICULT = %w[NOVICE ADVANCED EXHAUST INFINITE GRAVITY MAXIMUM HEAVENLY VIVID EXCEED]
+  DIFFICULT = %w[NOVICE ADVANCED EXHAUST INFINITE GRAVITY MAXIMUM HEAVENLY VIVID EXCEED].freeze
 
   CSV.foreach('db/song_data/rev_effect_id.csv', headers: true) do |row|
     # TODO: データが収集できたら青、黄譜面も対応させる

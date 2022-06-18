@@ -1,30 +1,34 @@
-class Admins::UsersController < ApplicationController
-  before_action :is_admin!
-  layout 'admin_application'
+# frozen_string_literal: true
 
-  def index
-    @q = User.all.ransack(params[:q])
-    @result_count = @q.result.count
-    @users = @q.result.page(params[:page])
-  end
+module Admins
+  class UsersController < ApplicationController
+    before_action :is_admin!
+    layout 'admin_application'
 
-  def edit
-    @user = User.find(params[:id])
-  end
+    def index
+      @q = User.all.ransack(params[:q])
+      @result_count = @q.result.count
+      @users = @q.result.page(params[:page])
+    end
 
-  def update
-    user = User.find(params[:id])
-    user.update(user_params)
-    redirect_to admins_path
-  end
+    def edit
+      @user = User.find(params[:id])
+    end
 
-  private
+    def update
+      user = User.find(params[:id])
+      user.update(user_params)
+      redirect_to admins_path
+    end
 
-  def is_admin!
-    redirect_to root_path unless current_user.is_admin
-  end
+    private
 
-  def user_params
-    params.require(:user).permit(:username, :score_opened, :ranking_opened, :deleted)
+    def is_admin!
+      redirect_to root_path unless current_user.is_admin
+    end
+
+    def user_params
+      params.require(:user).permit(:username, :score_opened, :ranking_opened, :deleted)
+    end
   end
 end

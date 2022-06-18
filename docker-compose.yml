@@ -1,23 +1,26 @@
-version: '3'
+version: "3"
 services:
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+  db:
+    image: postgres
     volumes:
-      - .:/sdvxest
+      - psgl_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: app_user_role
+      POSTGRES_PASSWORD: password
     ports:
-      - "3000:3000"
+      - 5433:5432
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    tty: true
+    stdin_open: true
     depends_on:
       - db
-    stdin_open: true
-    tty: true
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: root
     ports:
-      - "3306:3306"
+      - "3000:3000"
     volumes:
-      - ./tmp/db:/var/lib/mysql
-      - ./db/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+      - .:/sdvx_est
+volumes:
+  psgl_data:

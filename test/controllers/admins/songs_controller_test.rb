@@ -1,23 +1,27 @@
-require "test_helper"
+# frozen_string_literal: true
 
-class Admins::SongsControllerTest < ActionDispatch::IntegrationTest
-  test "should get new" do
-    get admins_songs_new_url
-    assert_response :success
-  end
+require 'test_helper'
 
-  test "should get edit" do
-    get admins_songs_edit_url
-    assert_response :success
-  end
+module Admins
+  class SongsControllerTest < ActionDispatch::IntegrationTest
+    test 'should get new' do
+      get admins_songs_new_url
+      assert_response :success
+    end
 
-  test "should get update" do
-    get admins_songs_update_url
-    assert_response :success
-  end
+    test 'should get edit' do
+      get admins_songs_edit_url
+      assert_response :success
+    end
 
-  test "should get delete" do
-    get admins_songs_delete_url
-    assert_response :success
+    test 'should get update' do
+      get admins_songs_update_url
+      assert_response :success
+    end
+
+    test 'should get delete' do
+      get admins_songs_delete_url
+      assert_response :success
+    end
   end
 end

@@ -1,2 +1,6 @@
-module Admins::UsersHelper
+# frozen_string_literal: true
+
+module Admins
+  module UsersHelper
+  end
 end

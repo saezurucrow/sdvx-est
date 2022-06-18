@@ -7,8 +7,9 @@ class ExScore < ApplicationRecord
   belongs_to :song
   has_many :ex_score_difference
 
-  EX_SCORE_CSV_HEADER = ['楽曲名', '難易度', '楽曲レベル', 'クリアランク', 'スコアグレード', 'ハイスコア', 'EXスコア', 'プレー回数', 'クリア回数', 'ULTIMATE CHAIN', 'PERFECT']
-  EX_SCORE_SONG_DIFFICULT = %w[NOVICE ADVANCED EXHAUST INFINITE GRAVITY MAXIMUM HEAVENLY VIVID EXCEED]
+  EX_SCORE_CSV_HEADER = ['楽曲名', '難易度', '楽曲レベル', 'クリアランク', 'スコアグレード', 'ハイスコア', 'EXスコア', 'プレー回数', 'クリア回数',
+                         'ULTIMATE CHAIN', 'PERFECT'].freeze
+  EX_SCORE_SONG_DIFFICULT = %w[NOVICE ADVANCED EXHAUST INFINITE GRAVITY MAXIMUM HEAVENLY VIVID EXCEED].freeze
 
   def self.conversion_csv(text, user_id)
     File.open("tmp/ex_score_#{user_id}.csv", 'w') do |file|
@@ -78,7 +79,7 @@ class ExScore < ApplicationRecord
         end
       end
 
-      raise '更新されたスコアが0件でした。EXスコアが全て0かSDVX-ESTの楽曲データ更新が遅れている可能性があります。' if upload_score_count == 0
+      raise '更新されたスコアが0件でした。EXスコアが全て0かSDVX-ESTの楽曲データ更新が遅れている可能性があります。' if upload_score_count.zero?
 
       upload_statuses.update!(upload_score_count: upload_score_count)
 

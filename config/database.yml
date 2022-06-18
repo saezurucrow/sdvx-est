@@ -83,5 +83,6 @@ test:
 production:
   <<: *default
   database: sdvx_est_production
-  username: sdvx_est
-  password: <%= ENV['SDVX_EST_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: <%= Rails.application.credentials.db[:password] %>
+  host: <%= Rails.application.credentials.db[:hostname] %>

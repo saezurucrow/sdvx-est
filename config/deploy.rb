@@ -13,6 +13,19 @@ set :nginx_sites_enabled_path, '/etc/nginx/conf.d'
 append :linked_files, 'config/master.key'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'node_modules'
 
+namespace :deploy do
+  desc 'db_seed'
+  task :db_seed do
+    on roles(:db) do |_host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rails, 'db:seed'
+        end
+      end
+    end
+  end
+end
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

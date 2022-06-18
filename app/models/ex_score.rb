@@ -36,7 +36,9 @@ class ExScore < ApplicationRecord
         song = Song.find_by(name: row['楽曲名'], level: row['楽曲レベル'], difficult: EX_SCORE_SONG_DIFFICULT.index(row['難易度']))
         next if song.nil?
 
-        raise "楽曲名: #{song.name} EXスコアのMAX値より高いスコアが検出されました。CSVデータはそのままコピーペーストをしてください。" if row['EXスコア'].to_i > song.max_ex_score && song.max_ex_score != -1
+        if row['EXスコア'].to_i > song.max_ex_score && song.max_ex_score != -1
+          raise "楽曲名: #{song.name} EXスコア値: #{row['EXスコア']} EXスコアのMAX値より高いスコアが検出されました。もしツールのEXスコア値に誤りがある場合はお手数ですが、スクリーンショットとともに運営Twitterにてお知らせください"
+        end
 
         ex_score = ExScore.find_by(user_id: user, song_id: song.id)
 

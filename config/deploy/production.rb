@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 server '35.79.8.162', user: 'saezurucrow', roles: %w[app db web]
 
 set :ssh_options, {

@@ -2,11 +2,12 @@
 
 module Admins
   class UsersController < ApplicationController
+    before_action :authenticate_user!
     before_action :is_admin!
     layout 'admin_application'
 
     def index
-      @q = User.all.ransack(params[:q])
+      @q = User.all.order(id: 'ASC').ransack(params[:q])
       @result_count = @q.result.count
       @users = @q.result.page(params[:page])
     end

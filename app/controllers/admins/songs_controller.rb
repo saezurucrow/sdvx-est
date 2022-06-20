@@ -2,6 +2,7 @@
 
 module Admins
   class SongsController < ApplicationController
+    before_action :authenticate_user!
     before_action :is_admin!
     layout 'admin_application'
 

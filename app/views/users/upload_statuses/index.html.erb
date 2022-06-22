@@ -9,9 +9,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @upload_statuses.each do |upload_status| %>
+    <% @upload_statuses.each_with_index do |upload_status, index| %>
       <tr>
-        <th scope="row"><%= upload_status.id %></td>
+        <th scope="row"><%= index + 1 %></td>
         <td><%= link_to upload_status.upload_score_count, users_upload_status_path(upload_status.id) %></td>
         <td><%= upload_status.created_at.to_s(:datetime_jp) %></td>
       </tr>

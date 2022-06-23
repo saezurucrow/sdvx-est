@@ -26,14 +26,14 @@ module Admins
         return
       end
 
-      if (params[:song][:level]).zero?
+      if params[:song][:level].to_i.zero?
         flash.now[:alert] = '難易度0は使用できません'
         @song = Song.new
         render :new
         return
       end
 
-      if (params[:song][:max_ex_score]).zero?
+      if params[:song][:max_ex_score].to_i.zero?
         flash.now[:alert] = '理論値0は使用できません'
         @song = Song.new
         render :new

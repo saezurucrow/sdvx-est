@@ -63,6 +63,10 @@ class ExScore < ApplicationRecord
         elsif ex_score.ex_score == row['EXスコア'].to_i
           ex_score.update!(play_count: row['プレー回数'])
         else
+          if (row['EXスコア'].to_i - ex_score.ex_score) < 0
+            raise "楽曲名: #{song.name} 前回のEXスコア値: #{ex_score.ex_score} 今回のEXスコア値: #{row['EXスコア']} 前回のEXスコアよりも少ないEXスコアが検出されました。最新のスコアデータを登録してください。"
+          end
+
           ExScoreDifference.create!(
             ex_score_id: ex_score.id,
             upload_status_id: upload_statuses.id,

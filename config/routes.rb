@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[edit update]
     resources :songs, only: %i[index new create edit update destroy]
     get 'statistics', to: 'statistics#index'
+    resources :upload_statuses, only: %i[index show]
   end
 
   get '*path', to: 'application#render_404'

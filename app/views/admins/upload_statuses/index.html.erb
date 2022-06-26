@@ -1,0 +1,29 @@
+<h2>UploadStatus 一覧</h2>
+
+<table class="table table-sm">
+  <div style="display: flex; align-items: flex-end; margin-bottom: 1rem;">
+    <span style="margin-left: auto;">件数: <%= @result_count %>件</span>
+  </div>
+  <thead class="sticky-top bg-white" style="top: 56px;">
+    <tr style="font-size: 12px;">
+      <th scope="col"><%= sort_link(@q, :id, "id")%></th>
+      <th scope="col"><%= sort_link(@q, :user_username, "更新者")%></th>
+      <th scope="col"><%= sort_link(@q, :upload_score_count, "更新件数")%></th>
+      <th scope="col"><%= sort_link(@q, :created_at, "作成日時")%></th>
+      <th scope="col"><%= sort_link(@q, :updated_at, "更新日時")%></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @upload_statuses.each do |upload_status| %>
+    <tr>
+      <td><%= upload_status.id %></td>
+      <td><%= upload_status.user.username %></td>
+      <td><%= link_to upload_status.upload_score_count, admins_upload_status_path(upload_status.id) %></td>
+      <td><%= upload_status.created_at.to_s(:datetime_jp) %></td>
+      <td><%= upload_status.updated_at.to_s(:datetime_jp) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @upload_statuses, window: 1 %>

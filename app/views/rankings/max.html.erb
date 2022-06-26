@@ -22,7 +22,7 @@
           <% end %>
         </td>
         <td><%= user.ex_scores.s_puc_count(user.id) %></td>
-        <td><%= user.upload_statuses.last.updated_at.to_s(:datetime_jp) %></td>
+        <td><%= user.upload_statuses.first.updated_at.to_s(:datetime_jp) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -2,8 +2,7 @@
 
 class HomesController < ApplicationController
   def index
-    @all_user_count = User.all.count
-    @song_user_count = Song.all.count
+    @last_song_updated_at = Song.last.updated_at.to_s(:date_jp)
   end
 
   def howto; end

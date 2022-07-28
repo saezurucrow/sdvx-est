@@ -23,7 +23,8 @@ Rails.application.routes.draw do
 
   get 'rankings/songs', to: 'rankings#index'
   get 'rankings/songs/:id', to: 'rankings#show', as: 'ranking'
-  get 'rankings/max', to: 'rankings#max'
+  # TODO: メンテナンス終了後復活させる
+  # get 'rankings/max', to: 'rankings#max'
 
   namespace :admins do
     get '/', to: 'users#index'

@@ -132,3 +132,5 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 end
+
+ENV['REDIS_URL'] = 'redis://localhost:6379'

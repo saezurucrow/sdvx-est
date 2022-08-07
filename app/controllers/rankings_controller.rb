@@ -31,7 +31,7 @@ class RankingsController < ApplicationController
       elsif prev_max_count == r[1]
         @ranks.push(rank)
       else
-        rank += 1
+        rank = index + 1
         @ranks.push(rank)
         prev_max_count = r[1]
       end

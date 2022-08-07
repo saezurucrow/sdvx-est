@@ -27,6 +27,7 @@ class ExScore < ApplicationRecord
       upload_statuses = UploadStatus.new(user_id: user.id)
       upload_statuses.save!
       upload_score_count = 0
+      max_count = 0
 
       CSV.foreach(csv, headers: true, liberal_parsing: true) do |row|
         next if row['EXスコア'] == '0' || row.blank?
@@ -44,12 +45,15 @@ class ExScore < ApplicationRecord
         ex_score = ExScore.find_by(user_id: user, song_id: song.id)
 
         if ex_score.nil?
+          max_minus = song.max_ex_score - row['EXスコア'].to_i
+          max_count += 1 if max_minus === 0
+
           ex_score = ExScore.new(
             user_id: user.id,
             song_id: song.id,
             ex_score: row['EXスコア'].to_i,
             play_count: row['プレー回数'],
-            max_minus: song.max_ex_score - row['EXスコア'].to_i,
+            max_minus: max_minus,
             percentage: (row['EXスコア'].to_i / song.max_ex_score.to_f).round(4)
           )
           ex_score.save!
@@ -61,11 +65,15 @@ class ExScore < ApplicationRecord
           )
           upload_score_count += 1
         elsif ex_score.ex_score == row['EXスコア'].to_i
+          max_count += 1 if ex_score.max_minus === 0
           ex_score.update!(play_count: row['プレー回数'])
         else
           if (row['EXスコア'].to_i - ex_score.ex_score) < 0
             raise "楽曲名: #{song.name} 前回のEXスコア値: #{ex_score.ex_score} 今回のEXスコア値: #{row['EXスコア']} 前回のEXスコアよりも少ないEXスコアが検出されました。最新のスコアデータを登録してください。"
           end
+
+          max_minus = song.max_ex_score - row['EXスコア'].to_i
+          max_count += 1 if max_minus === 0
 
           ExScoreDifference.create!(
             ex_score_id: ex_score.id,
@@ -76,7 +84,7 @@ class ExScore < ApplicationRecord
           ex_score.update!(
             ex_score: row['EXスコア'].to_i,
             play_count: row['プレー回数'],
-            max_minus: song.max_ex_score - row['EXスコア'].to_i,
+            max_minus: max_minus,
             percentage: (row['EXスコア'].to_i / song.max_ex_score.to_f).round(4)
           )
           upload_score_count += 1
@@ -84,6 +92,11 @@ class ExScore < ApplicationRecord
       end
 
       raise '更新されたスコアが0件でした。EXスコアが全て0かSDVX-ESTの楽曲データ更新が遅れている可能性があります。' if upload_score_count.zero?
+
+      if max_count.positive?
+        redis = Redis.new(url: ENV['REDIS_URL'] || 'redis://redis:6379')
+        redis.zadd('max_ranking', max_count, user.username)
+      end
 
       upload_statuses.update!(upload_score_count: upload_score_count)
 

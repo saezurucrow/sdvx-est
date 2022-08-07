@@ -37,3 +37,4 @@ yarn-debug.log*
 .yarn-integrity
 
 db/song_data/dummy_score.csv
+data/

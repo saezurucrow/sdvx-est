@@ -79,3 +79,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'kaminari'
 gem 'minitest'
 gem 'ransack'
+gem 'redis'
+gem 'redis-rails'

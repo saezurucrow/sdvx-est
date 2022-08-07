@@ -15,8 +15,32 @@ class RankingsController < ApplicationController
   end
 
   def max
-    @users = User.includes(%i[ex_scores upload_statuses]).where.not(upload_statuses: { id: nil }).select do |x|
-               x.ex_scores.s_puc_count(x.id).positive?
-             end.sort_by { |user| -user.ex_scores.s_puc_count(user.id) }
+    redirect_to root_path unless redis.exists('max_ranking')
+
+    @rankings = []
+    @ranks = []
+    rank = 1
+    prev_max_count = 0
+
+    ranking = redis.zrevrange('max_ranking', 0, -1, with_scores: true)
+    ranking.each.with_index do |r, index|
+      @rankings.push({ username: r[0], max_count: r[1] })
+      if index === 0
+        @ranks.push(rank)
+        prev_max_count = r[1]
+      elsif prev_max_count == r[1]
+        @ranks.push(rank)
+      else
+        rank += 1
+        @ranks.push(rank)
+        prev_max_count = r[1]
+      end
+    end
+  end
+
+  private
+
+  def redis
+    @redis ||= Redis.new(url: ENV['REDIS_URL'] || 'redis://redis:6379')
   end
 end

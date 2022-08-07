@@ -2,6 +2,8 @@
 
 require 'csv'
 
+redis = Redis.new(url: ENV['REDIS_URL'] || 'redis://redis:6379')
+
 if Rails.env != 'production' && (User.count === 0)
   # create User
   User.create!(
@@ -31,5 +33,13 @@ if Song.count === 0
       level: row[2],
       max_ex_score: row[3] == -1 ? 0 : row[3]
     )
+  end
+end
+
+unless User.count === 0
+  redis.flushall
+  User.all.each do |user|
+    max_count = user.ex_scores.s_puc_count(user.id)
+    redis.zadd('max_ranking', max_count, user.username) if max_count.positive?
   end
 end

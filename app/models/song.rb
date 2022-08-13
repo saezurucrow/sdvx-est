@@ -3,6 +3,7 @@
 class Song < ApplicationRecord
   has_many :ex_scores
   has_many :ex_score_differences
+  has_many :favorites, dependent: :destroy
 
   enum difficult: {
     NOV: 0,

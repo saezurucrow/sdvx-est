@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_616_132_038) do
+ActiveRecord::Schema.define(version: 20_220_813_113_833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -34,6 +32,15 @@ ActiveRecord::Schema.define(version: 20_220_616_132_038) do
     t.datetime 'updated_at', precision: 6, null: false
     t.integer 'max_minus', default: -1, null: false
     t.float 'percentage', default: 0.0, null: false
+  end
+
+  create_table 'favorite_songs', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'song_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['song_id'], name: 'index_favorite_songs_on_song_id'
+    t.index ['user_id'], name: 'index_favorite_songs_on_user_id'
   end
 
   create_table 'songs', force: :cascade do |t|
@@ -72,4 +79,7 @@ ActiveRecord::Schema.define(version: 20_220_616_132_038) do
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
     t.index ['username'], name: 'index_users_on_username', unique: true
   end
+
+  add_foreign_key 'favorite_songs', 'songs'
+  add_foreign_key 'favorite_songs', 'users'
 end

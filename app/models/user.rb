@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_many :ex_scores
   has_many :upload_statuses
-  has_many :favorites, dependent: :destroy
+  has_many :favorite_songs, dependent: :destroy
 
   enum score_opened: {
     publiced: 0,

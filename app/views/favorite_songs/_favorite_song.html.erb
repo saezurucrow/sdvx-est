@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <div id="favorite_songs_<%= song.id %>">
+    <% if song.favorite_songs.exists?(user_id: current_user.id) %>
+      <%= link_to destroy_favorite_songs_path(song), method: :delete, remote: true do %>
+        <i class="bi bi-star-fill"></i>
+      <% end %>
+    <% else %>
+      <%= link_to create_favorite_songs_path(song), method: :post, remote: true do %>
+        <i class="bi bi-star"></i>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

@@ -9,6 +9,7 @@
   </div>
   <thead class="sticky-top bg-white" style="top: 56px;">
     <tr style="font-size: 12px;">
+      <% if user_signed_in? %><th scope="col"></th><% end %>
       <th scope="col"><%= sort_link(@q, :name, "曲名")%></th>
       <th scope="col"><%= sort_link(@q, :difficult, "難易度")%></th>
       <th scope="col"><%= sort_link(@q, :level, "Lv")%></th>
@@ -18,6 +19,11 @@
   <tbody>
     <% @songs.each do |song| %>
       <tr>
+        <% if user_signed_in? %>
+          <td>
+            <%= render partial: 'favorite_songs/favorite_song', locals: {song: song} %>
+          </td>
+        <% end %>
         <td style="word-break: break-word;"><%= link_to song.name, ranking_path(song.id) %></td>
         <td><span class="badge badge-bg-<%= song.difficult %>"><%= song.difficult %></span></td>
         <td><%= song.level %></td>

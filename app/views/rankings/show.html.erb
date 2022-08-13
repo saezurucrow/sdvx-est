@@ -1,5 +1,6 @@
 <div class="container" style="text-align: center;">
   <h4 style="overflow-wrap: normal;"><%= @song.name %></h4>
+  <%= render partial: 'favorite_songs/favorite_song', locals: {song: @song} %>
   <span class="badge badge-bg-<%= @song.difficult %>"><%= @song.difficult %></span>
   <p>Lv. <%= @song.level %></p>
 </div>

@@ -25,6 +25,11 @@ Rails.application.routes.draw do
   get 'rankings/songs/:id', to: 'rankings#show', as: 'ranking'
   get 'rankings/max', to: 'rankings#max'
 
+  resource :favorites, only: %i[create destroy]
+
+  post 'favorite_song/:id', to: 'favorite_songs#create', as: 'create_favorite_songs'
+  delete 'favorite_song/:id', to: 'favorite_songs#destroy', as: 'destroy_favorite_songs'
+
   namespace :admins do
     get '/', to: 'users#index'
     resources :users, only: %i[edit update]

@@ -63,10 +63,12 @@
               <span><%= level %></span>
             <% end %>
           </div>
-          <div class="form-group">
-            <label for="favorite">お気に入り譜面</label>
-            <%= f.check_box :favorite_songs_song_name_present, { include_hidden: false } %>
-          </div>
+          <% if user_signed_in? %>
+            <div class="form-group">
+              <label for="favorite">お気に入り譜面</label>
+              <%= f.check_box :favorite_songs_user_username_eq, { include_hidden: false }, current_user.username %>
+            </div>
+          <% end %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

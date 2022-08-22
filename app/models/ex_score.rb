@@ -68,7 +68,7 @@ class ExScore < ApplicationRecord
           max_count += 1 if ex_score.max_minus === 0
           ex_score.update!(play_count: row['プレー回数'])
         else
-          if (row['EXスコア'].to_i - ex_score.ex_score) < 0
+          if (row['EXスコア'].to_i - ex_score.ex_score).negative?
             raise "楽曲名: #{song.name} 前回のEXスコア値: #{ex_score.ex_score} 今回のEXスコア値: #{row['EXスコア']} 前回のEXスコアよりも少ないEXスコアが検出されました。最新のスコアデータを登録してください。"
           end
 

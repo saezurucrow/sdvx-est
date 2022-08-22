@@ -2,11 +2,11 @@
   <div id="favorite_songs_<%= song.id %>">
     <% if song.favorite_songs.exists?(user_id: current_user.id) %>
       <%= link_to destroy_favorite_songs_path(song), method: :delete, remote: true do %>
-        <i class="bi bi-star-fill"></i>
+        <img src="/star-fill.svg" alt="star-fill" style="filter: invert(33%) sepia(59%) saturate(4144%) hue-rotate(199deg) brightness(101%) contrast(104%);">
       <% end %>
     <% else %>
       <%= link_to create_favorite_songs_path(song), method: :post, remote: true do %>
-        <i class="bi bi-star"></i>
+        <img src="/star.svg" alt="star" style="filter: invert(33%) sepia(59%) saturate(4144%) hue-rotate(199deg) brightness(101%) contrast(104%);">
       <% end %>
     <% end %>
   </div>

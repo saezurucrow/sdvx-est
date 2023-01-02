@@ -3,8 +3,8 @@
 class RankingsController < ApplicationController
   def index
     @q = Song.includes(:favorite_songs).order(id: 'DESC').ransack(params[:q])
-    @result_count = @q.result.count
-    @songs = @q.result.page(params[:page])
+    @result_count = @q.result(distinct: true).count
+    @songs = @q.result(distinct: true).page(params[:page])
   end
 
   def show

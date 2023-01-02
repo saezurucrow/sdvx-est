@@ -12,8 +12,8 @@ module Users
       end
 
       @q = ExScore.where(user_id: params[:user_id]).includes(song: [:favorite_songs]).ransack(params[:q])
-      @result_count = @q.result.count
-      @ex_scores = @q.result.page(params[:page])
+      @result_count = @q.result(distinct: true).count
+      @ex_scores = @q.result(distinct: true).page(params[:page])
     end
 
     def show; end

@@ -8,8 +8,8 @@ module Admins
 
     def index
       @q = User.all.order(id: 'ASC').ransack(params[:q])
-      @result_count = @q.result.count
-      @users = @q.result.page(params[:page])
+      @result_count = @q.result(distinct: true).count
+      @users = @q.result(distinct: true).page(params[:page])
     end
 
     def edit

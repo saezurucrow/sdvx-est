@@ -9,7 +9,7 @@ class RankingsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
-    @ranking = ExScore.where(song_id: @song.id).order(song_id: 'DESC').includes(:user).sort_by do |ex_score|
+    @ranking = ExScore.where(song_id: @song.id).order(:updated_at).includes(:user).sort_by do |ex_score|
       -ex_score.ex_score
     end
   end

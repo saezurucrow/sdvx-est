@@ -17,9 +17,21 @@
     </tr>
   </thead>
   <tbody>
-    <% @ranking.each.with_index do |ranking, index| %>
+    <% lastRanking = 0 %>
+    <% j = 1 %>
+    <% @ranking.each.with_index(1) do |ranking, index| %>
+      <% if index == 1 %>
+        <% lastRanking = ranking.ex_score %>
+      <% end %>
       <tr style="<% if ranking.user == current_user %>background-color: #ffe69c;<% end %>">
-        <th scope="row"><%= index + 1 %></td>
+        <% if ranking.ex_score != lastRanking %>
+          <% j = index %> 
+          <th scope="row"><%= j %></th>
+          <% lastRanking = ranking.ex_score %>
+        <% else %>
+          <% lastRanking = ranking.ex_score %>
+          <th scope="row"><%= j %></th>
+        <% end %>
         <td style="word-break: break-word;">
           <% if ranking.user.ranking_opened == 'open' || ranking.user == current_user %>
             <%= link_to ranking.user.username, user_path(ranking.user.id) %>

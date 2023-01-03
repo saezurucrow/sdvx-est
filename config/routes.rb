@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'rankings/songs', to: 'rankings#index'
   get 'rankings/songs/:id', to: 'rankings#show', as: 'ranking'
   get 'rankings/max', to: 'rankings#max'
+  get 'rankings/score_top', to: 'rankings#score_top'
 
   resource :favorites, only: %i[create destroy]
 

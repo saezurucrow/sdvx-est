@@ -9,9 +9,16 @@ class RankingsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
-    @ranking = ExScore.where(song_id: @song.id).order(song_id: 'DESC').includes(:user).sort_by do |ex_score|
+    @ranking = ExScore.where(song_id: @song.id).order(:updated_at).includes(:user).sort_by do |ex_score|
       -ex_score.ex_score
     end
+  end
+
+  # TODO: Top,Top Player,Your Score,Your No. のソート実装
+  def score_top
+    @q = Song.includes(:favorite_songs, ex_scores: [:user]).order(id: 'DESC').ransack(params[:q])
+    @result_count = @q.result(distinct: true).count
+    @songs = @q.result(distinct: true).page(params[:page])
   end
 
   def max

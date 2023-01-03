@@ -45,6 +45,9 @@
               <%= link_to '譜面一覧', rankings_songs_path, class: 'nav-link' %>
             </li>
             <li class="nav-item">
+              <%= link_to 'TOPスコア一覧', rankings_score_top_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
               <%= link_to 'S-PUCランキング', rankings_max_path, class: 'nav-link' %>
             </li>
             <li class="nav-item">
@@ -59,6 +62,9 @@
           <% else %>
             <li class="nav-item">
               <%= link_to '譜面一覧', rankings_songs_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'TOPスコア一覧', rankings_score_top_path, class: 'nav-link' %>
             </li>
             <li class="nav-item">
               <%= link_to 'S-PUCランキング', rankings_max_path, class: 'nav-link' %>

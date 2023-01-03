@@ -16,6 +16,9 @@ module Users
       if params[:q].blank?
         @result_count = @q.result(distinct: true).count
         @ex_scores = @q.result(distinct: true).page(params[:page])
+      elsif params[:q][:s].blank?
+        @result_count = @q.result(distinct: true).count
+        @ex_scores = @q.result(distinct: true).page(params[:page])
       elsif %w[song_name song_difficult song_level].any? { |t| params[:q][:s].include?(t) }
         @result_count = @q.result.count
         @ex_scores = @q.result.page(params[:page])

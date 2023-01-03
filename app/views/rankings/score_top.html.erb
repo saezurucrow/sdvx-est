@@ -32,7 +32,7 @@
             <%= render partial: 'favorite_songs/favorite_song', locals: {song: song} %>
           </td>
         <% end %>
-        <td style="word-break: break-word;"><%= link_to song.name, ranking_path(song.id) %></td>
+        <td><%= link_to song.name, ranking_path(song.id) %></td>
         <td><span class="badge badge-bg-<%= song.difficult %>"><%= song.difficult %></span></td>
         <td><%= song.level %></td>
         <% if user_signed_in? %>

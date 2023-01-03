@@ -14,6 +14,13 @@ class RankingsController < ApplicationController
     end
   end
 
+  # TODO: Top,Top Player,Your Score,Your No. のソート実装
+  def score_top
+    @q = Song.includes(:favorite_songs, ex_scores: [:user]).order(id: 'DESC').ransack(params[:q])
+    @result_count = @q.result(distinct: true).count
+    @songs = @q.result(distinct: true).page(params[:page])
+  end
+
   def max
     redirect_to root_path unless redis.exists('max_ranking')
 

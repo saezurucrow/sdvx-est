@@ -1,0 +1,116 @@
+<h2>TOPスコア一覧</h2>
+
+<p>※現在Topスコアや自身の順位等のソートはできません。<p> 
+
+<table class="table table-sm">
+  <div style="display: flex; align-items: flex-end; margin-bottom: 1rem;">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
+      絞り込み
+    </button>
+    <span style="margin-left: auto;">件数: <%= @result_count %>件</span>
+  </div>
+  <thead class="sticky-top bg-white" style="top: 56px;">
+    <tr style="font-size: 12px;">
+      <% if user_signed_in? %><th scope="col"></th><% end %>
+      <th scope="col"><%= sort_link(@q, :name, "曲名")%></th>
+      <th scope="col"><%= sort_link(@q, :difficult, "難易度")%></th>
+      <th scope="col"><%= sort_link(@q, :level, "Lv")%></th>
+      <th scope="col">Top</th>
+      <th scope="col">Top Player</th>
+      <th scope="col">Your Score</th>
+      <th scope="col">Your No.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |song| %>
+      <% ex_scores = song.ex_scores.order(:max_minus) %>
+      <tr>
+        <% if user_signed_in? %>
+          <td>
+            <%= render partial: 'favorite_songs/favorite_song', locals: {song: song} %>
+          </td>
+        <% end %>
+        <td style="word-break: break-word;"><%= link_to song.name, ranking_path(song.id) %></td>
+        <td><span class="badge badge-bg-<%= song.difficult %>"><%= song.difficult %></span></td>
+        <td><%= song.level %></td>
+        <% if ex_scores.present? %>
+          <% your_ex_score = ex_scores.find_by(user_id: current_user.id) %>
+          <td>
+            <% if ex_scores.first.max_minus === 0 %>
+              0
+            <% else %>
+              -<%= ex_scores.first.max_minus %>
+            <% end %>
+          </td>
+          <td><%= ex_scores.first.user.username %></td>
+          <% if your_ex_score.present? %>
+            <td> 
+              <% if your_ex_score.max_minus === 0 %>
+                0
+              <% else %>
+                -<%= your_ex_score.max_minus %>
+              <% end %>
+            </td>
+            <td><%= ex_scores.pluck(:max_minus).size.times.select { |i| ex_scores.pluck(:max_minus)[i] == your_ex_score.max_minus }.first + 1 %></td>
+          <% else %>
+            <td>--</td>
+            <td>--</td>
+          <% end %>
+        <% else %>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalTitle">絞り込み設定</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= search_form_for @q, class: "form-group", url: rankings_score_top_path do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">楽曲名</label>
+            <%= f.search_field :name_cont, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="difficult">難易度</label><br />
+            <% Song.difficults.each do |difficult| %>
+              <%= f.check_box :difficult_eq_any, { multiple: true, include_hidden: false }, difficult[1] %>
+              <span style="margin-right: 0.6em;" class="badge badge-bg-<%= difficult[0] %>"><%= difficult[0] %></span>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <label for="level">Lv</label><br />
+            <% Song.array_levels.each do |level| %>
+              <%= f.check_box :level_eq_any, { multiple: true, include_hidden: false }, level %>
+              <span><%= level %></span>
+            <% end %>
+          </div>
+          <% if user_signed_in? %>
+            <div class="form-group">
+              <label for="favorite">お気に入り譜面</label>
+              <%= f.check_box :favorite_songs_user_username_eq, { include_hidden: false }, current_user.username %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit '検索', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= paginate @songs, window: 1 %>

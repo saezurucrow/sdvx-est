@@ -8,6 +8,7 @@ module Admins
 
     def index
       @q = UploadStatus.all.includes(:user).order(id: 'DESC').ransack(params[:q])
+      # FIXME: ソートがPGではうまくいかない
       @result_count = @q.result(distinct: true).count
       @upload_statuses = @q.result(distinct: true).page(params[:page])
     end

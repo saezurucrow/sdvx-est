@@ -3,6 +3,8 @@
   <p><%= @user.username %> さんのスコア一覧です</p>
 <% end %>
 
+<%= params[:q].blank? %>
+
 <% if @ex_scores.count > 0 %>
   <table class="table table-sm">
     <div style="display: flex; align-items: flex-end; margin-bottom: 1rem;">

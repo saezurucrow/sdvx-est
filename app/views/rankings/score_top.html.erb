@@ -17,8 +17,10 @@
       <th scope="col"><%= sort_link(@q, :level, "Lv")%></th>
       <th scope="col">Top</th>
       <th scope="col">Top Player</th>
-      <th scope="col">Your Score</th>
-      <th scope="col">Your No.</th>
+      <% if user_signed_in? %>
+        <th scope="col">Your Score</th>
+        <th scope="col">Your No.</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -33,34 +35,62 @@
         <td style="word-break: break-word;"><%= link_to song.name, ranking_path(song.id) %></td>
         <td><span class="badge badge-bg-<%= song.difficult %>"><%= song.difficult %></span></td>
         <td><%= song.level %></td>
-        <% if ex_scores.present? %>
-          <% your_ex_score = ex_scores.find_by(user_id: current_user.id) %>
-          <td>
-            <% if ex_scores.first.max_minus === 0 %>
-              0
-            <% else %>
-              -<%= ex_scores.first.max_minus %>
-            <% end %>
-          </td>
-          <td><%= ex_scores.first.user.username %></td>
-          <% if your_ex_score.present? %>
-            <td> 
-              <% if your_ex_score.max_minus === 0 %>
+        <% if user_signed_in? %>
+          <% if ex_scores.present? %>
+            <% your_ex_score = ex_scores.find_by(user_id: current_user.id) %>
+            <td>
+              <% if ex_scores.first.max_minus === 0 %>
                 0
               <% else %>
-                -<%= your_ex_score.max_minus %>
+                -<%= ex_scores.first.max_minus %>
               <% end %>
             </td>
-            <td><%= ex_scores.pluck(:max_minus).size.times.select { |i| ex_scores.pluck(:max_minus)[i] == your_ex_score.max_minus }.first + 1 %></td>
+            <td>
+              <% if ex_scores.first.user.ranking_opened == 'open' || ex_scores.first.user == current_user %>
+                <%= link_to ex_scores.first.user.username, user_path(ex_scores.first.user.id) %>
+              <% else %>
+                --
+              <% end %>
+            </td>
+            <% if your_ex_score.present? %>
+              <td> 
+                <% if your_ex_score.max_minus === 0 %>
+                  0
+                <% else %>
+                  -<%= your_ex_score.max_minus %>
+                <% end %>
+              </td>
+              <td><%= ex_scores.pluck(:max_minus).size.times.select { |i| ex_scores.pluck(:max_minus)[i] == your_ex_score.max_minus }.first + 1 %></td>
+            <% else %>
+              <td>--</td>
+              <td>--</td>
+            <% end %>
           <% else %>
+            <td>--</td>
+            <td>--</td>
             <td>--</td>
             <td>--</td>
           <% end %>
         <% else %>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
+          <% if ex_scores.present? %>
+            <td>
+              <% if ex_scores.first.max_minus === 0 %>
+                0
+              <% else %>
+                -<%= ex_scores.first.max_minus %>
+              <% end %>
+            </td>
+            <td>
+              <% if ex_scores.first.user.ranking_opened == 'open' %>
+                <%= link_to ex_scores.first.user.username, user_path(ex_scores.first.user.id) %>
+              <% else %>
+                --
+              <% end %>
+            </td>
+          <% else %>
+            <td>--</td>
+            <td>--</td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>

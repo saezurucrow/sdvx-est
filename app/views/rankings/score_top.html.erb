@@ -15,17 +15,17 @@
       <th scope="col"><%= sort_link(@q, :name, "曲名")%></th>
       <th scope="col"><%= sort_link(@q, :difficult, "難易度")%></th>
       <th scope="col"><%= sort_link(@q, :level, "Lv")%></th>
-      <th scope="col">Top</th>
+      <th scope="col">Top MAX-</th>
       <th scope="col">Top Player</th>
       <% if user_signed_in? %>
-        <th scope="col">Your Score</th>
+        <th scope="col">Your MAX-</th>
         <th scope="col">Your No.</th>
       <% end %>
     </tr>
   </thead>
   <tbody>
     <% @songs.each do |song| %>
-      <% ex_scores = song.ex_scores.order(:max_minus) %>
+      <% ex_scores = song.ex_scores.order(:max_minus, :updated_at) %>
       <tr>
         <% if user_signed_in? %>
           <td>

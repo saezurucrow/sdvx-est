@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SDVX-EST</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta property="og:description" content="サウンドボルテックスの非公式EXスコア管理ツールです。" />
+    <% if Rails.env.production? %>
+      <%= render 'layouts/google_analytics' %>
+    <% end %>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+  </head>
+
+  <body>
+    <h1 style="text-align: center;">メンテナンス中</h1>
+
+    <p style="text-align: center;">現在サーバー移行ため、メンテナンスを行っています。</p>
+    <p style="text-align: center;">予定時間: <b>2023/3/4(土) 22:00 ~ 2023/3/5(日) 22:00</b></p>
+    <p style="text-align: center;">上記時間帯はSDVX-ESTを利用することができません。</p>
+
+    <p style="text-align: center;">終了時刻が前後する場合がございます。最新情報は公式Twitterをご覧ください。</p>
+
+    <div style="margin: 0 auto;">
+      <a class="twitter-timeline" href="https://twitter.com/sdvx_EXtool?ref_src=twsrc%5Etfw">Tweets by sdvx_EXtool</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+  </body>
+</html>

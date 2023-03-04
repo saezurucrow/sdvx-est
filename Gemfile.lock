@@ -337,7 +337,7 @@ DEPENDENCIES
   kaminari
   listen (~> 3.3)
   minitest
-  pg
+  pg (= 1.3.5)
   pry-byebug
   puma (~> 5.0)
   rails (~> 6.1.6)

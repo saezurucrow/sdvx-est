@@ -1,4 +1,4 @@
-root_dir = '/var/www/html/sdvx_est/current'
+root_dir = '/var/www/html/sdvx_est/shared'
 
 max_threads_count = ENV.fetch('RAILS_MAX_THREADS', 5)
 min_threads_count = ENV.fetch('RAILS_MIN_THREADS', max_threads_count)

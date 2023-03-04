@@ -15,6 +15,15 @@ append :linked_dirs, '.bundle' # gemの保存先をシンボリックリンク�
 append :linked_files, 'config/database.yml', 'config/master.key'
 append :linked_dirs, '.bundle', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
 
+namespace :deploy do
+  task :puma_restart_again do
+    invoke  'puma:stop'
+    invoke! 'puma:start'
+  end
+end
+
+after 'puma:restart', 'deploy:puma_restart_again'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

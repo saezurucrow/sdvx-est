@@ -10,6 +10,8 @@ set :rbenv_type, :system
 set :rbenv_ruby, '2.7.5' # rails6から.ruby-version内の記述が変わっていて File.read('.ruby-version').strip では動かないので注意
 set :rbenv_path, '/usr/local/rbenv'
 
+append :linked_dirs, '.bundle' # gemの保存先をシンボリックリンクにして、gemをリリース間で共有
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

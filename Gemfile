@@ -61,6 +61,7 @@ group :development do
   gem 'bcrypt_pbkdf'
 
   gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
 
   gem 'pry-byebug'
 end

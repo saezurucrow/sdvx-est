@@ -24,6 +24,7 @@ end
 
 after 'puma:restart', 'deploy:puma_restart_again'
 
+set :puma_service_unit_name, 'puma.service'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

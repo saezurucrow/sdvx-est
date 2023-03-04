@@ -12,6 +12,9 @@ set :rbenv_path, '/usr/local/rbenv'
 
 append :linked_dirs, '.bundle' # gemの保存先をシンボリックリンクにして、gemをリリース間で共有
 
+append :linked_files, 'config/database.yml', 'config/master.key'
+append :linked_dirs, '.bundle', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

@@ -25,4 +25,8 @@ class Song < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[created_at difficult id level max_ex_score name updated_at]
   end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[ex_score_differences ex_scores favorite_songs]
+  end
 end

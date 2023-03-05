@@ -33,4 +33,9 @@ class User < ApplicationRecord
   def will_save_change_to_email?
     false
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at deleted deleted_at email encrypted_password id is_admin player_id player_name ranking_opened
+       remember_created_at reset_password_sent_at reset_password_token score_opened updated_at username]
+  end
 end

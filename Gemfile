@@ -56,13 +56,10 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
 
-  gem 'capistrano'
-  gem 'ed25519'
-  gem 'bcrypt_pbkdf'
-
-  gem 'capistrano-rbenv'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
+  gem "capistrano", "~> 3.10", require: false
+  gem "capistrano-rails", "~> 1.6", require: false
+  gem 'capistrano-rbenv', '~> 2.2'
+  gem 'capistrano-rbenv-vars', '~> 0.1'
   gem 'capistrano3-puma'
 
   gem 'pry-byebug'

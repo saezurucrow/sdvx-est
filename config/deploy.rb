@@ -32,7 +32,13 @@ namespace :deploy do
   end
 end
 
+# Nginxの設定ファイル名と置き場所を修正
+set :nginx_config_name, "#{fetch(:application)}.conf"
+set :nginx_sites_enabled_path, '/etc/nginx/conf.d'
+
 after 'puma:restart', 'deploy:puma_restart_again'
+
+set :puma_daemonize, false
 
 set :puma_service_unit_name, 'puma.service'
 # Default branch is :master

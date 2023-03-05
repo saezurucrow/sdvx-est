@@ -21,4 +21,8 @@ class Song < ApplicationRecord
   def self.array_levels
     [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at difficult id level max_ex_score name updated_at]
+  end
 end

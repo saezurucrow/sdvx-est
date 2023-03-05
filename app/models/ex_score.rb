@@ -115,4 +115,8 @@ class ExScore < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[created_at ex_score id max_minus percentage play_count song_id updated_at user_id]
   end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[ex_score_difference song user]
+  end
 end

@@ -7,7 +7,7 @@ set :deploy_to, '/var/www/html/sdvx_est'
 set :branch, ENV['BRANCH'] || 'master'
 
 set :rbenv_type, :system
-set :rbenv_ruby, '2.7.5' # rails6から.ruby-version内の記述が変わっていて File.read('.ruby-version').strip では動かないので注意
+set :rbenv_ruby, '2.7.5'.strip # rails6から.ruby-version内の記述が変わっていて File.read('.ruby-version').strip では動かないので注意
 set :rbenv_path, '/usr/local/rbenv'
 
 append :linked_dirs, '.bundle' # gemの保存先をシンボリックリンクにして、gemをリリース間で共有
@@ -19,6 +19,16 @@ namespace :deploy do
   task :puma_restart_again do
     invoke  'puma:stop'
     invoke! 'puma:start'
+  end
+  desc 'db_seed'
+  task :db_seed do
+    on roles(:db) do |_host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rails, 'db:seed'
+        end
+      end
+    end
   end
 end
 

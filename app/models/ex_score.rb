@@ -111,4 +111,8 @@ class ExScore < ApplicationRecord
   def self.s_puc_count_by_level(user_id)
     ExScore.joins(:song).where(user_id: user_id, max_minus: 0).group('songs.level').count
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at ex_score id max_minus percentage play_count song_id updated_at user_id]
+  end
 end

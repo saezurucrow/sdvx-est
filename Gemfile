@@ -56,6 +56,9 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
 
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
+
   gem "capistrano", "~> 3.10", require: false
   gem "capistrano-rails", "~> 1.6", require: false
   gem 'capistrano-rbenv', '~> 2.2'

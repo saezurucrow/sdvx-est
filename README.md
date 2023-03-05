@@ -1,6 +1,6 @@
 # SDVX-EST
 ## 技術スタック
-- Ruby 2.7.5
+- Ruby 2.7.7
 - Rails 6.1.4
 
 ## Usage

@@ -10,10 +10,10 @@ set :rbenv_type, :system
 set :rbenv_ruby, '2.7.5'.strip # rails6から.ruby-version内の記述が変わっていて File.read('.ruby-version').strip では動かないので注意
 set :rbenv_path, '/usr/local/rbenv'
 
-append :linked_dirs, '.bundle' # gemの保存先をシンボリックリンクにして、gemをリリース間で共有
+# append :linked_dirs, '.bundle' # gemの保存先をシンボリックリンクにして、gemをリリース間で共有
 
-append :linked_files, 'config/database.yml', 'config/master.key'
-append :linked_dirs, '.bundle', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
+# append :linked_files, 'config/database.yml', 'config/master.key'
+# append :linked_dirs, '.bundle', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets'
 
 namespace :deploy do
   task :puma_restart_again do

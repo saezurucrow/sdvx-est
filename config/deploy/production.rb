@@ -1,13 +1,3 @@
-# frozen_string_literal: true
-
-server '35.79.8.162', user: 'saezurucrow', roles: %w[app db web]
-
-set :ssh_options, {
-  keys: %w[~/.ssh/sdvx_est.pem],
-  forward_agent: true,
-  auth_methods: %w[publickey]
-}
-
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
@@ -16,6 +6,8 @@ set :ssh_options, {
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
+
+server 'sdvx-est.net', user: 'saezurucrow', port: '50022', roles: %w[app db web]
 
 # role-based syntax
 # ==================

@@ -11,7 +11,7 @@ module Users
                     alert: 'scoreが非公開に設定されています'
       end
 
-      @q = ExScore.where(user_id: params[:user_id]).includes(song: [:favorite_songs]).ransack(params[:q])
+      @q = ExScore.where(user_id: params[:user_id]).order(song_id: 'DESC').includes(song: [:favorite_songs]).ransack(params[:q])
       # FIXME: ソートがPGではうまくいかないので回避
       if params[:q].blank?
         @result_count = @q.result(distinct: true).count

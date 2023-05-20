@@ -6,4 +6,6 @@ class HomesController < ApplicationController
   end
 
   def howto; end
+
+  def support; end
 end

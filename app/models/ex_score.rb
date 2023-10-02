@@ -39,7 +39,7 @@ class ExScore < ApplicationRecord
         next if song.nil?
 
         if row['EXスコア'].to_i > song.max_ex_score && song.max_ex_score != -1
-          raise "楽曲名: #{song.name} EXスコア値: #{row['EXスコア']} EXスコアのMAX値より高いスコアが検出されました。もしツールのEXスコア値に誤りがある場合はお手数ですが、スクリーンショットとともに運営Twitterにてお知らせください"
+          raise "楽曲名: #{song.name} EXスコア値: #{row['EXスコア']} EXスコアのMAX値より高いスコアが検出されました。もしツールのEXスコア値に誤りがある場合はお手数ですが、スクリーンショットとともに運営Twiiter(X)にてお知らせください"
         end
 
         ex_score = ExScore.find_by(user_id: user, song_id: song.id)

@@ -21,6 +21,11 @@
     <%= f.number_field :max_ex_score, autocomplete: "max_ex_score", class: "form-control", required: true %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :delete_flag %>
+    <%= f.check_box :delete_flag, {}, 'deleted', 'active' %>
+  </div>
+
   <%= f.submit "編集", class: "btn btn-primary" %>
 <% end %>
 

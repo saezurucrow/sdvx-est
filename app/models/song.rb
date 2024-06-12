@@ -5,6 +5,11 @@ class Song < ApplicationRecord
   has_many :ex_score_differences
   has_many :favorite_songs, dependent: :destroy
 
+  enum delete_flag: {
+    active: 0,
+    deleted: 1
+  }
+
   enum difficult: {
     NOV: 0,
     ADV: 1,

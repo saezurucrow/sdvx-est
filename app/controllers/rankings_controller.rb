@@ -2,13 +2,14 @@
 
 class RankingsController < ApplicationController
   def index
-    @q = Song.includes(:favorite_songs).order(id: 'DESC').ransack(params[:q])
+    @q = Song.where.not(delete_flag: 1).includes(:favorite_songs).order(id: 'DESC').ransack(params[:q])
     @result_count = @q.result(distinct: true).count
     @songs = @q.result(distinct: true).page(params[:page])
   end
 
   def show
     @song = Song.find(params[:id])
+    redirect_to root_path if @song.delete_flag === 'deleted'
     @ranking = ExScore.where(song_id: @song.id).order(:updated_at).includes(:user).sort_by do |ex_score|
       -ex_score.ex_score
     end
@@ -16,7 +17,7 @@ class RankingsController < ApplicationController
 
   # TODO: Top,Top Player,Your Score,Your No. のソート実装
   def score_top
-    @q = Song.includes(:favorite_songs, ex_scores: [:user]).order(id: 'DESC').ransack(params[:q])
+    @q = Song.where.not(delete_flag: 1).includes(:favorite_songs, ex_scores: [:user]).order(id: 'DESC').ransack(params[:q])
     @result_count = @q.result(distinct: true).count
     @songs = @q.result(distinct: true).page(params[:page])
   end

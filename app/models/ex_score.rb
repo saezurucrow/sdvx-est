@@ -105,11 +105,11 @@ class ExScore < ApplicationRecord
   end
 
   def self.s_puc_count(user_id)
-    ExScore.where(user_id: user_id, max_minus: 0).count
+    ExScore.joins(:song).where(user_id: user_id, max_minus: 0).where.not(song: { delete_flag: 1 }).count
   end
 
   def self.s_puc_count_by_level(user_id)
-    ExScore.joins(:song).where(user_id: user_id, max_minus: 0).group('songs.level').count
+    ExScore.joins(:song).where(user_id: user_id, max_minus: 0).where.not(songs: { delete_flag: 1 }).group('songs.level').count
   end
 
   def self.ransackable_attributes(_auth_object = nil)

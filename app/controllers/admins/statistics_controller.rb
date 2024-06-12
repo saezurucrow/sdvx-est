@@ -9,6 +9,8 @@ module Admins
     def index
       @user_count = User.count
       @song_count = Song.count
+      @active_song_count = Song.where(delete_flag: 0).count
+      @delete_song_count = Song.where(delete_flag: 1).count
       @ex_score_count = ExScore.count
       @ex_score_difference_count = ExScoreDifference.count
       @upload_status_count = UploadStatus.count

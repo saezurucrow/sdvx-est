@@ -9,6 +9,8 @@
 
 ```sh
 $ docker-compose build
+# redis起動のため
+$ docker-compose up -d
 $ docker-compose run --rm web rails db:create
 $ docker-compose run --rm web rails db:migrate
 $ docker-compose run --rm web rails db:seed

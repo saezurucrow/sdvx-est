@@ -80,7 +80,7 @@ module Admins
     end
 
     def song_params
-      params.require(:song).permit(:name, :level, :difficult, :max_ex_score)
+      params.require(:song).permit(:name, :level, :difficult, :max_ex_score, :delete_flag)
     end
   end
 end

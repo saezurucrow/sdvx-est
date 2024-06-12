@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def mypage
     @user = current_user
-    @ex_scores = @user.ex_scores
+    @ex_scores = @user.ex_scores.joins(:song).where.not(song: { delete_flag: 1 })
     @s_puc_count = @ex_scores.s_puc_count(current_user.id)
   end
 
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to users_mypage_path if @user == current_user
 
-    @ex_scores = @user.ex_scores
+    @ex_scores = @user.ex_scores.joins(:song).where.not(song: { delete_flag: 1 })
     @s_puc_count = @ex_scores.s_puc_count(params[:id])
   end
 end

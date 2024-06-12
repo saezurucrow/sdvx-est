@@ -21,6 +21,7 @@
       <th scope="col"><%= sort_link(@q, :max_ex_score, "理論値")%></th>
       <th scope="col"><%= sort_link(@q, :created_at, "作成日時")%></th>
       <th scope="col"><%= sort_link(@q, :updated_at, "更新日時")%></th>
+      <th scope="col"><%= sort_link(@q, :delete_flag, "削除曲")%></th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +34,7 @@
       <td><%= song.max_ex_score %></td>
       <td><%= song.created_at.to_s(:datetime_jp) %></td>
       <td><%= song.updated_at.to_s(:datetime_jp) %></td>
+      <td><%= song.delete_flag %></td>
     </tr>
     <% end %>
   </tbody>
